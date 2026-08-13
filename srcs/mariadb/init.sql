@@ -1,8 +1,6 @@
-alter user 'root'@'localhost' identified by '${DB_PASSWORD}';
+create database if not exists `matcha`;
 
-create database if not exists ${DB_NAME};
-
-use ${DB_NAME};
+use `matcha`;
 
 create table if not exists `users` (
 	`id` int auto_increment,
