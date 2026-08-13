@@ -8,6 +8,8 @@ services:
       - matcha
     environment:
       - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - mariadb_volume:/var/lib/mysql/
 
   nginx:
     image: nginx:alpine
@@ -17,10 +19,25 @@ services:
     networks:
       - matcha
     volumes:
-      - ./frontend:/usr/share/nginx/html
+      - frontend_volume:/usr/share/nginx/html
     ports:
       - 8080:80
 
 networks:
   matcha:
     driver: bridge
+
+volumes:
+  frontend_volume:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/${USER}/data/frontend
+  mariadb_volume:
+    driver : local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/${USER}/data/mariadb
+  
