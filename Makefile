@@ -1,5 +1,4 @@
 all:
-	@mkdir -p /home/${USER}/data/frontend /home/${USER}/data/mariadb
 	@docker compose -f docker-compose.yml up -d --build
 
 up:
@@ -12,8 +11,6 @@ restart: down up
 
 clean:
 	@docker compose -f docker-compose.yml down -v --remove-orphans
-	@docker run --rm -v /home/${USER}:/mariadb alpine chown -R 0:0 /mariadb
-	@rm -rf /home/${USER}/data
 
 fclean: clean
 	@docker system prune -af --volumes
