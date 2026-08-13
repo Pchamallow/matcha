@@ -14,9 +14,10 @@ services:
     # ports:
     #   - 8888:3306
 
-  nginx:
-    image: nginx:alpine
-    container_name: nginx
+  frontend:
+    image: frontend
+    build: srcs/frontend
+    container_name: frontend
     env_file:
       - .env
     networks:
@@ -43,4 +44,3 @@ volumes:
       o: bind
       type: none
       device: /home/${USER}/data/mariadb
-  
