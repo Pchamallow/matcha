@@ -14,6 +14,15 @@ services:
     # ports:
     #   - 8888:3306
 
+  backend:
+    image: backend
+    build: srcs/backend
+    container_name: backend
+    env_file:
+      - .env
+    networks:
+      - matcha
+
   frontend:
     image: frontend
     build: srcs/frontend
