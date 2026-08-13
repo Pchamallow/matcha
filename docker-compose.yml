@@ -10,6 +10,8 @@ services:
       - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
     volumes:
       - mariadb_volume:/var/lib/mysql/
+    # ports:
+    #   - 8888:3306
 
   nginx:
     image: nginx:alpine

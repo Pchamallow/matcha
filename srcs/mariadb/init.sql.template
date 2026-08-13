@@ -3,6 +3,7 @@ alter user 'root'@'localhost' identified by '${DB_PASSWORD}';
 create database if not exists ${DB_NAME};
 
 use ${DB_NAME};
+
 create table if not exists `users` (
 	`id` int auto_increment,
 	`username` varchar(15) not null,
