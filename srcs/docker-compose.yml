@@ -7,7 +7,7 @@ services:
     networks:
       - matcha
     environment:
-      - MARIADB_ROOT_PASSWORD=circus123
+      - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
 
   nginx:
     image: nginx:alpine
