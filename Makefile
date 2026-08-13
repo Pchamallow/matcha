@@ -13,7 +13,6 @@ restart: down up
 clean:
 	@docker compose -f docker-compose.yml down -v --remove-orphans
 	@docker run --rm -v /home/${USER}:/maria alpine chown -R 0:0 /maria
-	@rm -rf ./data
 	@rm -rf /home/${USER}/data
 
 fclean: clean
