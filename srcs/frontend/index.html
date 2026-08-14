@@ -11,20 +11,18 @@
 			try
 			{
 				const response = await fetch(API_URL);
-				const myString = await response.text;
+				const myString = await response.text();
 				alert(myString);
 			} catch (error)
 			{
 				console.log(error);
 			}
 		}
-
-		welcome();
 	</script>
 </head>
 	<body>
 		<h1>Hello world!</h1>
 		<input id="name" type="text" placeholder="Your name...">
-		<button>CLIQUE MOIIIIIIIIIIIIII</button>
+		<button onclick="welcome()">CLIQUE MOIIIIIIIIIIIIII</button>
 	</body>
 </html>
