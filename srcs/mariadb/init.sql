@@ -15,3 +15,9 @@ create table if not exists `users` (
 	`created_at` date default current_date not null,
 	primary key(`id`)
 );
+
+create table if not exists `test` (
+	`id` int auto_increment,
+	`username` varchar(15) not null,
+	primary key(`id`)
+);

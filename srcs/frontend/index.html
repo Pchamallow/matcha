@@ -5,14 +5,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>matcha</title>
 	<script>
-		async function welcome()
+		async function register()
 		{
-			const API_URL = "http://localhost:3000/"
+			const API_URL = "http://localhost:3001/addUser"
+			const name = document.getElementById('name').value;
 			try
 			{
-				const response = await fetch(API_URL);
-				const myString = await response.text();
-				alert(myString);
+				const response = await fetch(API_URL, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({name})
+				});
+				if (response.status == 400)
+					throw response.text();
+				alert("Done!");
 			} catch (error)
 			{
 				console.log(error);
@@ -23,6 +29,6 @@
 	<body>
 		<h1>Hello world!</h1>
 		<input id="name" type="text" placeholder="Your name...">
-		<button onclick="welcome()">CLIQUE MOIIIIIIIIIIIIII</button>
+		<button onclick="register()">CLIQUE MOIIIIIIIIIIIIII</button>
 	</body>
 </html>
