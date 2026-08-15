@@ -4,31 +4,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>matcha</title>
-	<script>
-		async function register()
-		{
-			const API_URL = "http://localhost:3000/addUser"
-			const name = document.getElementById('name').value;
-			try
-			{
-				const response = await fetch(API_URL, {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({username: name})
-				});
-				if (response.status == 400)
-					throw response.text();
-				alert("Done!");
-			} catch (error)
-			{
-				console.error("pas bien bouhhh : " + error.message);
-			}
-		}
-	</script>
 </head>
 	<body>
 		<h1>Hello world!</h1>
 		<input id="name" type="text" placeholder="Your name...">
-		<button onclick="register()">CLIQUE MOIIIIIIIIIIIIII</button>
+		<button id="register">CLIQUE MOIIIIIIIIIIIIII</button>
+		<script type="module" src="./src/main.ts"></script>
 	</body>
 </html>
