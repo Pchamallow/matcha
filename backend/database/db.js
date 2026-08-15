@@ -1,5 +1,5 @@
 import sqlite3 from 'sqlite3';
-import { open } from 'squilte';
+import { open } from 'sqlite';
 
 const db = await open ({
 	filename: './database.sqlite',
@@ -8,25 +8,23 @@ const db = await open ({
 
 await db.exec(`
 	CREATE TABLE IF NOT EXISTS users (
-		id int auto_increment,
-		username varchar(15) not null,
-		password varchar(255) not null,
-		first_name varchar(50) not null,
-		last_name varchar(50) not null,
-		gender char not null,
-		email varchar(255) not null,
-		fame_rating int not null default 0,
-		city varchar(255) not null,
-		created_at date default current_date not null,
-		primary key(id)
+		id integer primary key autoincrement,
+		username text unique not null,
+		password text not null,
+		first_name text not null,
+		last_name text not null,
+		gender text not null,
+		email text not null,
+		fame_rating integer not null default 0,
+		city text not null,
+		created_at numeric default current_date not null
 	);
 `);
 
 await db.exec(`
 	CREATE TABLE IF NOT EXISTS test (
-		id int auto_increment,
-		username varchar(15) not null,
-		primary key(id)
+		id integer primary key autoincrement,
+		username text not null unique
 	);
 `);
 

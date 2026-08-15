@@ -14,14 +14,14 @@
 				const response = await fetch(API_URL, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({name})
+					body: JSON.stringify({username: name})
 				});
 				if (response.status == 400)
 					throw response.text();
 				alert("Done!");
 			} catch (error)
 			{
-				console.log("pas bien bouhhh : " + error);
+				console.error("pas bien bouhhh : " + error.message);
 			}
 		}
 	</script>
