@@ -10,7 +10,6 @@ async function register(): Promise<void>
 
 	const textbox = document.getElementById('name') as HTMLInputElement | null;
 
-
 	if (!textbox)
 	{
 		console.error("Element #textbox not found");
