@@ -7,7 +7,7 @@
 	<script>
 		async function register()
 		{
-			const API_URL = "http://localhost:3001/addUser"
+			const API_URL = "http://localhost:3000/addUser"
 			const name = document.getElementById('name').value;
 			try
 			{
@@ -21,7 +21,7 @@
 				alert("Done!");
 			} catch (error)
 			{
-				console.log(error);
+				console.log("pas bien bouhhh : " + error);
 			}
 		}
 	</script>
