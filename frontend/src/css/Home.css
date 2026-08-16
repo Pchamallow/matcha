@@ -1,0 +1,25 @@
+#home {
+    text-align: center;
+}
+
+#home button {
+    margin: auto;
+    margin-top: 10px;
+    display: block;
+    border-radius: 4rem;
+}
+
+.banner {
+    background:#936a9d;
+    width:100%;
+    height:250px;
+    border: solid;
+    border-color: #936a9d;
+    border-width: 5px;
+    margin: 0;
+}
+
+.banner__content {
+    padding: 16px;
+    
+}

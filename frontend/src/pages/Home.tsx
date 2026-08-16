@@ -15,8 +15,14 @@ function Home() {
 
 	return (
 		<>
-			<button onClick={register}>Register</button>
-			<button onClick={login}>Login</button>
+			<div className="banner">
+				<div className="banner__context"
+				<strong> Clownder </strong>
+			</div>
+			<div id="home">
+				<button onClick={register}>Register</button>
+				<button onClick={login}>Login</button>
+			</div>
 		</>
 	);
 }
