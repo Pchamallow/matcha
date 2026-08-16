@@ -8,9 +8,15 @@ function Home() {
 		navigate("/register");
 	}
 
+	function login()
+	{
+		navigate("/login");
+	}
+
 	return (
 		<>
 			<button onClick={register}>Register</button>
+			<button onClick={login}>Login</button>
 		</>
 	);
 }
