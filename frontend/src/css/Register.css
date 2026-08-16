@@ -1,0 +1,19 @@
+#registration {
+	text-align: center;
+}
+
+#registration input {
+	margin: auto;
+	margin-top: 10px;
+	width: 350px;
+	display: block;
+}
+
+#registration button {
+	margin-top: 10px;
+}
+
+#registration select {
+	width: 358px;
+	margin-top: 10px;
+}
