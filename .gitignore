@@ -3,3 +3,6 @@ node_modules
 dist
 *.sqlite
 package-lock.json
+.pid
+frontend-logs.txt
+backend-logs.txt
