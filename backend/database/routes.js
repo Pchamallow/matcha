@@ -35,7 +35,6 @@ router.get('/getUser', async (req, res) => {
 		{
 			return res.status(200).send({
 				username: row.username,
-				password = row.password,
 				first_name = row.first_name,
 				last_name = row.last_name,
 				gender = row.gender,
