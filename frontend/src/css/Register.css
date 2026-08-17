@@ -1,5 +1,6 @@
 #registration {
 	text-align: center;
+	font-size: 20px;
 }
 
 #registration input {
@@ -7,13 +8,53 @@
 	margin-top: 10px;
 	width: 350px;
 	display: block;
-}
-
-#registration button {
-	margin-top: 10px;
+	border-radius: 1rex;
+	font-size: 20px;
+	border-style: solid;
+	border-color: #63588381;
+	background:#ffffff75;
 }
 
 #registration select {
 	width: 358px;
+	font-size: 20px;
 	margin-top: 10px;
+	border-radius: 1rex;
+	border-width: 2px;
+	border-style: solid;
+	color:#635883b9;
+	border-color: #63588381;
+	background:#ffffff75;
+}
+
+#registration button {
+	margin: auto;
+	width: 150px;
+	height: 50px;
+	margin-top: 30px;
+	display: block;
+	border-radius: 1rex;
+	font-size: 20px;
+	color: rgb(252, 252, 251);
+	border-color: #ab95b1;
+	border-style: none;
+	background:#ab95b1;
+}
+
+.banner{
+	background:#936a9d;
+	height: 250px;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.background{
+	background:#ffffff75;
+	height: 500px;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

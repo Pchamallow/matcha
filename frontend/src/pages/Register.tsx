@@ -31,21 +31,26 @@ function Register() {
 
 	return (
 		<>
-			<div id="registration">
-				<h1>Register</h1>
-				<input type="text" placeholder="Username" autoComplete="username" value={username} onChange={(event) => setUsername(event.target.value)}/>
-				<input type="password" placeholder="Password" autoComplete="new-password" value={password} onChange={(event) => setPassword(event.target.value)}/>
-				<input type="text" placeholder="First name" autoComplete="given-name" value={first_name} onChange={(event) => setFirstName(event.target.value)}/>
-				<input type="text" placeholder="Last name" autoComplete="family-name" value={last_name} onChange={(event) => setLastName(event.target.value)}/>
-				<select value={gender} onChange={(event) => setGender(event.target.value)}>
-					<option value="">Gender...</option>
-					<option value="F">Female</option>
-					<option value="M">Male</option>
-					<option value="N">Non specified</option>
-				</select>
-				<input type="text" placeholder="Email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)}/>
-				<input type="text" placeholder="City" autoComplete="address-level2" value={city} onChange={(event) => setCity(event.target.value)}/>
-				<button onClick={register}>Register</button>
+			<header>
+				<div className="banner"></div>
+			</header>
+			<div className="background">
+				<div id="registration">
+					<h1>Register</h1>
+					<input type="text" placeholder="Username" autoComplete="username" value={username} onChange={(event) => setUsername(event.target.value)}/>
+					<input type="password" placeholder="Password" autoComplete="new-password" value={password} onChange={(event) => setPassword(event.target.value)}/>
+					<input type="text" placeholder="First name" autoComplete="given-name" value={first_name} onChange={(event) => setFirstName(event.target.value)}/>
+					<input type="text" placeholder="Last name" autoComplete="family-name" value={last_name} onChange={(event) => setLastName(event.target.value)}/>
+					<select value={gender} onChange={(event) => setGender(event.target.value)}>
+						<option value="">Gender...</option>
+						<option value="F">Female</option>
+						<option value="M">Male</option>
+						<option value="N">Non specified</option>
+					</select>
+					<input type="text" placeholder="Email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)}/>
+					<input type="text" placeholder="City" autoComplete="address-level2" value={city} onChange={(event) => setCity(event.target.value)}/>
+					<button onClick={register}>Register</button>
+				</div>
 			</div>
 		</>
 	);
