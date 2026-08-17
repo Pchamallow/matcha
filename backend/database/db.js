@@ -22,9 +22,12 @@ await db.exec(`
 `);
 
 await db.exec(`
-	CREATE TABLE IF NOT EXISTS test (
+	CREATE TABLE IF NOT EXISTS user_sessions (
 		id integer primary key autoincrement,
-		username text not null unique
+		username text not null unique,
+		token text not null unique,
+		start_date numeric not null,
+		end_date numeric not null
 	);
 `);
 
