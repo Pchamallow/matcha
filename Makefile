@@ -7,12 +7,14 @@ BACKEND_PID = ./backend/.pid
 FRONTEND_LOGS = ./frontend/frontend-logs.txt
 BACKEND_LOGS = ./backend/backend-logs.txt
 
-FRONTEND_UP = @echo "$(LIGHT_GREEN)Frontend UP!$(RESET)"
+FRONTEND_UP = echo "$(LIGHT_GREEN)Frontend UP!$(RESET)"
 FRONTEND_DOWN = echo "$(YELLOW)Frontend DOWN!$(RESET)"
 FRONTEND_NOT_RUNNING = echo "$(YELLOW)Frontend is not running.$(RESET)"
-BACKEND_UP = @echo "$(LIGHT_GREEN)Backend UP!$(RESET)"
+FRONTEND_ALREADY_RUNNING = echo "$(YELLOW)Frontend is already running.$(RESET)"
+BACKEND_UP = echo "$(LIGHT_GREEN)Backend UP!$(RESET)"
 BACKEND_DOWN = echo "$(YELLOW)Backend DOWN!$(RESET)"
 BACKEND_NOT_RUNNING = echo "$(YELLOW)Backend is not running.$(RESET)"
+BACKEND_ALREADY_RUNNING = echo "$(YELLOW)Backend is already running.$(RESET)"
 
 INSTALL_DONE = @echo "$(LIGHT_GREEN)Project installed!$(RESET)"
 
@@ -32,18 +34,32 @@ install:
 	$(INSTALL_DONE)
 
 frontend-up:
-	@setsid sh -c 'cd "$(FRONTEND)" && exec npm run dev' \
-		> "$(FRONTEND_LOGS)" 2>&1 < /dev/null & \
-	PID=$$!; \
-	echo $$PID > "$(FRONTEND_PID)"
-	$(FRONTEND_UP)
+	@if [ ! -s "$(FRONTEND_PID)" ]; then \
+		setsid sh -c 'cd "$(FRONTEND)" && exec npm run dev' \
+			> "$(FRONTEND_LOGS)" 2>&1 < /dev/null & \
+		PID=$$!; \
+		echo $$PID > "$(FRONTEND_PID)"; \
+		$(FRONTEND_UP); \
+	else \
+		$(FRONTEND_ALREADY_RUNNING); \
+	fi
 
 backend-up:
-	@setsid sh -c 'cd "$(BACKEND)" && exec npm start' \
-		> "$(BACKEND_LOGS)" 2>&1 < /dev/null & \
-	PID=$$!; \
-	echo $$PID > "$(BACKEND_PID)"
-	$(BACKEND_UP)
+	@if [ ! -s "$(BACKEND_PID)" ]; then \
+		setsid sh -c 'cd "$(BACKEND)" && exec npm start' \
+			> "$(BACKEND_LOGS)" 2>&1 < /dev/null & \
+		PID=$$!; \
+		echo $$PID > "$(BACKEND_PID)"; \
+		$(BACKEND_UP); \
+	else \
+		$(BACKEND_ALREADY_RUNNING); \
+	fi
+
+frontend-logs:
+	@cat $(FRONTEND_LOGS)
+
+backend-logs:
+	@cat $(BACKEND_LOGS)
 
 frontend-down:
 	@if [ -s "$(FRONTEND_PID)" ]; then \
@@ -71,4 +87,4 @@ clean: frontend-down backend-down
 	@rm -rf $(BACKEND_LOGS)
 	@rm -rf $(BACKEND_PID)
 
-.PHONY: install up down frontend-up frontend-down backend-up backend-down clean
+.PHONY: install up down frontend-up frontend-down backend-up backend-down frontend-logs backend-logs clean

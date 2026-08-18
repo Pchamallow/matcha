@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
 	const [username, setUsername] = useState("");
@@ -8,6 +9,8 @@ function Register() {
 	const [gender, setGender] = useState("");
 	const [email, setEmail] = useState("");
 	const [city, setCity] = useState("");
+
+	const navigate = useNavigate();
 
 	async function register() {
 		try {
@@ -24,6 +27,7 @@ function Register() {
 			}
 
 			alert("Done!");
+			navigate("/");
 		} catch (error) {
 			console.error("pas bien bouhhh :", error);
 		}

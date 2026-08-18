@@ -26,10 +26,19 @@ function Home() {
 				<div id="home">
 					<button onClick={register}>Register</button>
 					<button onClick={login}>Login</button>
+					<Logout/>
 				</div>
 			</div>
 		</>
 	);
+}
+
+const Logout = () => {
+	return (
+		<div>
+			<button>Logout</button>
+		</div>
+	)
 }
 
 export default Home;
