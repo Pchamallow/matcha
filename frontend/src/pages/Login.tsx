@@ -27,7 +27,8 @@ function Login() {
 			else if (response.status == 200)
 			{
 				alert("Log in successfully");
-				cookies.set(user, 'exampleToken123', {
+				const token = crypto.randomUUID();
+				cookies.set(user, token, {
 					maxAge: 3600, path: '/' });
 				const value = cookies.get('userToken');
 				console.log(value);
