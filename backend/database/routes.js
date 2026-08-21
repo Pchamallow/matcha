@@ -35,11 +35,11 @@ router.get('/getUser', async (req, res) => {
 		{
 			return res.status(200).send({
 				username: row.username,
-				first_name = row.first_name,
-				last_name = row.last_name,
-				gender = row.gender,
-				email = row.email,
-				city = row.city
+				first_name: row.first_name,
+				last_name: row.last_name,
+				gender: row.gender,
+				email: row.email,
+				city: row.city
 			});
 		}
 		res.status(404).send();

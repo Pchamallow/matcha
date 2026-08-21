@@ -28,13 +28,13 @@ up: frontend-up backend-up
 down: frontend-down backend-down
 
 install:
-	@cd $(FRONTEND) && npm install && . ~/.nvm/nvm.sh && nvm install 20
-	@cd $(BACKEND) && npm install && . ~/.nvm/nvm.sh && nvm install 20
+	. ~/.nvm/nvm.sh && nvm install 20
+	@cd $(FRONTEND) && npm install
+	@cd $(BACKEND) && npm install
 	$(INSTALL_DONE)
 
 frontend-up:
 	@if [ ! -s "$(FRONTEND_PID)" ]; then \
-		. ~/.nvm/nvm.sh && nvm use 20 1>/dev/null \
 		setsid sh -c 'cd "$(FRONTEND)" && exec npm run dev' \
 			> "$(FRONTEND_LOGS)" 2>&1 < /dev/null & \
 		PID=$$!; \
@@ -46,7 +46,6 @@ frontend-up:
 
 backend-up:
 	@if [ ! -s "$(BACKEND_PID)" ]; then \
-		. ~/.nvm/nvm.sh && nvm use 20 1>/dev/null \
 		setsid sh -c 'cd "$(BACKEND)" && exec npm start' \
 			> "$(BACKEND_LOGS)" 2>&1 < /dev/null & \
 		PID=$$!; \
