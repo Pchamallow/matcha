@@ -22,7 +22,7 @@
 	border-radius: 1rex;
 	border-width: 2px;
 	border-style: solid;
-	color:#635883b9;
+	color:#000000ff;
 	border-color: #63588381;
 	background:#ffffff75;
 }
@@ -39,6 +39,14 @@
 	border-color: #ab95b1;
 	border-style: none;
 	background:#ab95b1;
+}
+
+#pw-requirements p{
+	margin: auto;
+	display: block;
+	text-align: left;
+	font-size: 18px;
+	color:#97021ab9;
 }
 
 .banner{
