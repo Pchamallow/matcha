@@ -32,6 +32,7 @@ function Login() {
 					maxAge: 3600, path: '/' });
 				const value = cookies.get('userToken');
 				console.log(value);
+				console.log(await response.text());
 				navigate("/");
 			}
 		} catch (error) {

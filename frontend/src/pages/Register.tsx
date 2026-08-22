@@ -15,7 +15,7 @@ function Register() {
 
 	async function register() {
 		try {
-			if (!username || !password || !repeatPassword || !first_name || !last_name || !gender || !gender || !email || !city)
+			if (!username || !password || !repeatPassword || !first_name || !last_name || !gender || !email || !city)
 			{
 				alert("Do not leave empty fields.");
 				return;
@@ -30,6 +30,15 @@ function Register() {
 				alert("Passwords don't match.");
 				return;
 			}
+
+			const emailCheck = await fetch(`http://localhost:3001/api/authentification/checkEmail?email=${email}`);
+
+			if (emailCheck.status != 200)
+			{
+				alert("Invalid email.");
+				throw await emailCheck.text();
+			}
+
 			const response = await fetch("http://localhost:3000/addUser", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
@@ -39,17 +48,26 @@ function Register() {
 			if (response.status == 400)
 			{
 				alert("Error!");
-				throw response.text();
+				throw await response.text();
 			}
 
-			alert("Done!");
+			alert(`A confirmation Email was sent to your inbox at: ${email}`);
 			navigate("/");
 		} catch (error) {
 			console.error("pas bien bouhhh :", error);
 		}
 	}
 
-	function update(id: string, requirement: boolean, text: string)
+	function testField(id: string, condition: boolean)
+	{
+		const field = document.getElementById(id);
+		if (condition)
+			field!.style.backgroundColor = "#ff869ab9"
+		else
+			field!.style.backgroundColor = "#ffffffff"
+	}
+
+	function updatePasswordTexts(id: string, requirement: boolean, text: string)
 	{
 		const element = document.getElementById(id);
 		element!.textContent = (requirement ? "✔ " : "✗ ") + text;
@@ -60,30 +78,49 @@ function Register() {
 		if (/\s/.test(newPassword))
 			return;
 
-		update("pw-requirement-length", newPassword.length >= 8, "At least 8 characters");
+		updatePasswordTexts("pw-requirement-length", newPassword.length >= 8, "At least 8 characters");
 		// Regex to get from A to Z
-		update("pw-requirement-caps", /[A-Z]/.test(newPassword), "At least 1 capitalized letter");
+		updatePasswordTexts("pw-requirement-caps", /[A-Z]/.test(newPassword), "At least 1 capitalized letter");
 		// Regex to get from 0 to 9
-		update("pw-requirement-digit", /[0-9]/.test(newPassword), "At least 1 digit");
+		updatePasswordTexts("pw-requirement-digit", /[0-9]/.test(newPassword), "At least 1 digit");
 		// Regex to get special characters
-		update("pw-requirement-special", /[^\w]/.test(newPassword), "At least 1 special character (@, !, %, ...)");
-
-		const repeatPasswordField = document.getElementById("pw-repeat") as HTMLInputElement;
+		updatePasswordTexts("pw-requirement-special", /[^\w]/.test(newPassword), "At least 1 special character (@, !, %, ...)");
 
 		setPassword(newPassword);
+		testField("pw-repeat", repeatPassword.length > 0 && repeatPassword != newPassword);
 	}
 
-	function updateRepeatPassword(newPassword : string)
+	function updateRepeatPassword(newRepeatPassword : string)
 	{
-		if (/\s/.test(newPassword))
+		if (/\s/.test(newRepeatPassword))
 			return;
 
-		const repeatPasswordField = document.getElementById("pw-repeat");
-		if (newPassword.length > 0 && newPassword != password)
-			repeatPasswordField!.style.backgroundColor = "#ff869ab9"
-		else
-			repeatPasswordField!.style.backgroundColor = "#ffffffff"
-		setRepeatPassword(newPassword);
+		setRepeatPassword(newRepeatPassword);
+		testField("pw-repeat", password.length > 0 && newRepeatPassword.length > 0 && newRepeatPassword != password);
+	}
+
+	function isEmailInvalid(newEmail: string): boolean
+	{
+		if (newEmail.length == 0)
+			return false;
+		const parts = newEmail.split('@');
+		if (parts.length != 2)
+			return true;
+		if (parts[0].length == 0 || parts[1].length == 0)
+			return true;
+		const secondPart = parts[1];
+		if (newEmail.length > 0 && (!newEmail.includes('.') || secondPart.endsWith('.') || secondPart.startsWith('.')))
+			return true;
+		return false;
+	}
+
+	async function updateEmail(newEmail : string)
+	{
+		if (/\s/.test(newEmail))
+			return;
+
+		testField("input-email", isEmailInvalid(newEmail));
+		setEmail(newEmail);
 	}
 
 	return (
@@ -116,8 +153,8 @@ function Register() {
 						<option value="M">Male</option>
 						<option value="N">Non specified</option>
 					</select>
-					<input type="text" placeholder="Email" autoComplete="email" value={email}
-						onChange={(event) => setEmail(event.target.value)}/>
+					<input id="input-email" type="text" placeholder="Email" autoComplete="email" value={email}
+						onChange={(event) => updateEmail(event.target.value)}/>
 					<input type="text" placeholder="City" autoComplete="address-level2" value={city}
 						onChange={(event) => setCity(event.target.value)}/>
 					<button onClick={register}>Register</button>
