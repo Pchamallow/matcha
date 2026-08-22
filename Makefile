@@ -79,6 +79,7 @@ backend-down:
 		$(BACKEND_DOWN); \
 		kill $$PID 2>/dev/null; \
 		rm -f "$(BACKEND_PID)"; \
+		fuser -k 3000/tcp 1>/dev/null; \
 	else \
 		$(BACKEND_NOT_RUNNING); \
 	fi
