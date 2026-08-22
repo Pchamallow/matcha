@@ -35,6 +35,7 @@ install:
 
 frontend-up:
 	@if [ ! -s "$(FRONTEND_PID)" ]; then \
+		. ~/.nvm/nvm.sh && nvm use 20 1>/dev/null && \
 		setsid sh -c 'cd "$(FRONTEND)" && exec npm run dev' \
 			> "$(FRONTEND_LOGS)" 2>&1 < /dev/null & \
 		PID=$$!; \
@@ -46,6 +47,7 @@ frontend-up:
 
 backend-up:
 	@if [ ! -s "$(BACKEND_PID)" ]; then \
+		. ~/.nvm/nvm.sh && nvm use 20 1>/dev/null && \
 		setsid sh -c 'cd "$(BACKEND)" && exec npm start' \
 			> "$(BACKEND_LOGS)" 2>&1 < /dev/null & \
 		PID=$$!; \
