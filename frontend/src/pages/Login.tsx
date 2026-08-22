@@ -14,10 +14,11 @@ function Login() {
 
 	async function login() {
 		try {
+			const token = crypto.randomUUID();
 			const response = await fetch("http://localhost:3000/login", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({username: user, password})
+				body: JSON.stringify({username: user, password, token})
 			});
 
 			if (response.status == 400)
@@ -27,7 +28,8 @@ function Login() {
 			else if (response.status == 200)
 			{
 				alert("Log in successfully");
-				const token = crypto.randomUUID();
+				const expirationDate = new Date();
+				expirationDate.setDate(expirationDate.getDate() + 1);
 				cookies.set(user, token, {
 					maxAge: 3600, path: '/' });
 				const value = cookies.get('userToken');

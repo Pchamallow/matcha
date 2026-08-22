@@ -51,15 +51,29 @@ router.get('/getUser', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-	const { username, password } = req.body;
-	if (!username || !password)
+	const { username, password, token } = req.body;
+	if (!username || !password || !token)
 		return res.status(400).send("Bad request");
 	try
 	{
 		const user = await db.get("SELECT * FROM `users` WHERE `username` = ? AND `password` = ? OR `email` = ? AND `password` = ?",
 			[username, password, username, password]);
 		if (user)
-			return res.status(200).send("XDDDDDDD");
+		{
+			const date = new Date();
+			const formatDate = (date) =>
+				date.getFullYear().toString() +
+				String(date.getMonth() + 1).padStart(2, "0") +
+				String(date.getDate()).padStart(2, "0") +
+				String(date.getHours()).padStart(2, "0") +
+				String(date.getMinutes()).padStart(2, "0") +
+				String(date.getSeconds()).padStart(2, "0");
+			const startDate = new Date();
+			const endDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
+			await db.run("INSERT INTO `user_sessions` (username, token, start_date, end_date) VALUES (?,?,?,?)",
+				[username, token, startDate.getTime(), endDate.getTime()]);
+			return res.status(200).send("Back: Login successfully, yeay !");
+		}
 		res.status(404).send();
 	} catch (error)
 	{
@@ -86,20 +100,4 @@ router.get('/getSession', async (req, res) => {
 	}
 })
 
-router.post('/registerSession', async (req, res) => {
-	const { username, token, start_date, end_date } = req.body;
-	if (!username || !token || !start_date || !end_date)
-		return res.status(400).send("Bad request");
-	try
-	{
-		await db.run("INSERT INTO `user_sessions` (username, token, start_date, end_date) VALUES (?,?,?,?)",
-			[username, token, start_date, end_date]);
-		res.status(201).send("Token ", token, " registered for username ", username);
-	} catch (error)
-	{
-		console.error("Sql error : " + error.message);
-		res.status(500).send();
-	}
-})
-
-export { router };
+export default router;

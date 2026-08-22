@@ -27,6 +27,8 @@ up: frontend-up backend-up
 
 down: frontend-down backend-down
 
+restart : down up
+
 install:
 	. ~/.nvm/nvm.sh && nvm install 20
 	@cd $(FRONTEND) && npm install
