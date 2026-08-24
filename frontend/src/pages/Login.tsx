@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {Eye, EyeOff} from "lucide-react";
-import Cookies, { Cookie } from 'universal-cookie';
+import Cookies from 'universal-cookie';
 import { useNavigate } from "react-router-dom";
 
 
@@ -32,7 +32,7 @@ function Login() {
 				expirationDate.setDate(expirationDate.getDate() + 1);
 				cookies.set(user, token, {
 					maxAge: 3600, path: '/' });
-				const value = cookies.get('userToken');
+				const value = cookies.get(user);
 				getUserSession(token); // tests wip
 				console.log(value);
 				console.log(await response.text());
@@ -79,6 +79,8 @@ async function getUserSession(token: string) {
 		const response = await fetch(`http://localhost:3000/api/db/getSession?token=${token}`);
 		if (response.status == 404)
 			alert("User isn't login");
+		else if (response.status == 500)
+			console.error("Login error : database");
 		else
 			console.log("User is login");
 		return (response);

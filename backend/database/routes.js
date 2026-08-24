@@ -88,7 +88,8 @@ router.get('/getSession', async (req, res) => {
 		return res.status(400).send("Bad request");
 	try
 	{
-		const row = await db.get("SELECT * FROM users WHERE username = (SELECT username FROM `user_sessions` WHERE `token` = ?)",
+		const row = await db.get("SELECT username, first_name, last_name, gender, email, fame_rating, city FROM users WHERE username"
+			+ " = (SELECT username FROM `user_sessions` WHERE `token` = ?)",
 			[token])
 		if (row)
 			return res.status(200).send(row);
@@ -101,3 +102,5 @@ router.get('/getSession', async (req, res) => {
 })
 
 export { router };
+
+// ELECT (username, first_name, last_name, gender, email, fame_rating, city) FROM users WHERE username = (SELECT username FROM `user_sessions` WHERE `token` = ddd3e69e-1037-482e-bd0b-dcb24857584a)
