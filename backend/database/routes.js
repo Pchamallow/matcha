@@ -83,16 +83,16 @@ router.post('/login', async (req, res) => {
 })
 
 router.get('/getSession', async (req, res) => {
-	const { token } = req.body;
+	const { token } = req.query;
 	if (!token)
 		return res.status(400).send("Bad request");
 	try
 	{
-		const row = await db.get("SELECT * FROM `user_sessions` WHERE `token` = ?",
-			[token]);
+		const row = await db.get("SELECT * FROM users WHERE username = (SELECT username FROM `user_sessions` WHERE `token` = ?)",
+			[token])
 		if (row)
-			return res.status(200).send(row.username);
-		res.status(404).send();
+			return res.status(200).send(row);
+		res.status(404).send(`${username} token not found in database.`);
 	} catch (error)
 	{
 		console.error("Sql error : " + error.message);
@@ -100,4 +100,4 @@ router.get('/getSession', async (req, res) => {
 	}
 })
 
-export default router;
+export { router };

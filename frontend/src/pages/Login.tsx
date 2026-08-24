@@ -33,6 +33,7 @@ function Login() {
 				cookies.set(user, token, {
 					maxAge: 3600, path: '/' });
 				const value = cookies.get('userToken');
+				getUserSession(token); // tests wip
 				console.log(value);
 				console.log(await response.text());
 				navigate("/");
@@ -66,6 +67,24 @@ function Login() {
 			</div>
 		</>
 	);
-} 
+}
+
+// renseigner sur une strcut user qui contient ous les infos username, last name etc sans password 
+// cette struct va etre renvoyer par le get session
+// faire une fonction pour le getsession
+
+async function getUserSession(token: string) {
+
+	try{
+		const response = await fetch(`http://localhost:3000/getSession?token=${token}`);
+		if (response.status == 404)
+			alert("User isn't login");
+		else
+			console.log("User is login");
+		return (response);
+	} catch (error) {
+		console.error("Login error :", error);
+	}
+}
 
 export default Login;
