@@ -31,24 +31,36 @@ function Register() {
 				return;
 			}
 
-			const emailCheck = await fetch(`http://localhost:3001/api/authentification/checkEmail?email=${email}`);
+			const checkEmail = await fetch(`http://localhost:3001/api/auth/checkEmail?email=${email}`);
 
-			if (emailCheck.status != 200)
+			if (checkEmail.status != 200)
 			{
 				alert("Invalid email.");
-				throw await emailCheck.text();
+				throw await checkEmail.text();
 			}
 
-			const response = await fetch("http://localhost:3000/addUser", {
+			const addUser = await fetch("http://localhost:3000/api/db/addUser", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({username, password, first_name, last_name, gender, email, city})
 			});
 
-			if (response.status == 400)
+			if (addUser.status != 201)
 			{
 				alert("Error!");
-				throw await response.text();
+				throw await addUser.text();
+			}
+
+			const sendEmail = await fetch("http://localhost:3001/api/auth/sendEmail", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({email})
+			});
+
+			if (sendEmail.status != 200)
+			{
+				alert("Error in sending confirmation mail!");
+				throw await sendEmail.text();
 			}
 
 			alert(`A confirmation Email was sent to your inbox at: ${email}`);

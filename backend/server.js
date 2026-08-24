@@ -10,8 +10,8 @@ const AUTH_PORT = 3001;
 
 app.use(express.json());
 app.use(cors());
-app.use("/", dbRoutes);
-app.use("/api/authentification", authRoutes);
+app.use("/api/db", dbRoutes);
+app.use("/api/auth", authRoutes);
 
 app.listen(DB_PORT, () => {
     console.log(`Database running at http://localhost:${DB_PORT}`);

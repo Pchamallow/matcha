@@ -17,7 +17,7 @@ router.post('/addUser', async (req, res) => {
 	} catch (error)
 	{
 		console.error("grosse erreur!!! : " + error.message);
-		res.status(500).send();
+		res.status(500).send(error.message);
 		return;
 	}
 	res.status(201).send();

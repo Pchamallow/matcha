@@ -15,7 +15,7 @@ function Login() {
 	async function login() {
 		try {
 			const token = crypto.randomUUID();
-			const response = await fetch("http://localhost:3000/login", {
+			const response = await fetch("http://localhost:3000/api/db/login", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({username: user, password, token})
@@ -76,7 +76,7 @@ function Login() {
 async function getUserSession(token: string) {
 
 	try{
-		const response = await fetch(`http://localhost:3000/getSession?token=${token}`);
+		const response = await fetch(`http://localhost:3000/api/db/getSession?token=${token}`);
 		if (response.status == 404)
 			alert("User isn't login");
 		else

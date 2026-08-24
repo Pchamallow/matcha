@@ -14,7 +14,8 @@ await db.exec(`
 		first_name text not null,
 		last_name text not null,
 		gender text not null,
-		email text not null,
+		email text unique not null,
+		email_verified integer not null default 0,
 		fame_rating integer not null default 0,
 		city text not null,
 		created_at numeric default current_date not null
@@ -28,6 +29,14 @@ await db.exec(`
 		token text not null unique,
 		start_date numeric not null,
 		end_date numeric not null
+	);
+`);
+
+await db.exec(`
+	CREATE TABLE IF NOT EXISTS mail_tokens (
+		id integer primary key autoincrement,
+		email text not null unique,
+		token text not null unique
 	);
 `);
 

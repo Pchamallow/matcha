@@ -7,6 +7,8 @@ BACKEND_PID = ./backend/.pid
 FRONTEND_LOGS = ./frontend/frontend-logs.txt
 BACKEND_LOGS = ./backend/backend-logs.txt
 
+DATABASE_PATH = ./backend/database.sqlite
+
 FRONTEND_UP = echo "$(LIGHT_GREEN)Frontend UP!$(RESET)"
 FRONTEND_DOWN = echo "$(YELLOW)Frontend DOWN!$(RESET)"
 FRONTEND_NOT_RUNNING = echo "$(YELLOW)Frontend is not running.$(RESET)"
@@ -86,7 +88,10 @@ backend-down:
 		$(BACKEND_NOT_RUNNING); \
 	fi
 
-clean: frontend-down backend-down
+cleardb:
+	@rm -rf $(DATABASE_PATH)
+
+clean: frontend-down backend-down cleardb
 	@rm -rf $(FRONTEND_LOGS)
 	@rm -rf $(FRONTEND_PID)
 	@rm -rf $(BACKEND_LOGS)
