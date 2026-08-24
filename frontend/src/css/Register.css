@@ -41,28 +41,10 @@
 	background:#ab95b1;
 }
 
-#pw-requirements p{
+#pw-requirements p {
 	margin: auto;
 	display: block;
 	text-align: left;
 	font-size: 18px;
 	color:#97021ab9;
-}
-
-.banner{
-	background:#936a9d;
-	height: 250px;
-	margin: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.background{
-	background:#ffffff75;
-	height: 500px;
-	margin: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }

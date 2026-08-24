@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import cors from "cors";
 import { router as dbRoutes } from "./database/routes.js"
-import { router as authRoutes } from "./authentification/routes.js"
+import { router as authRoutes } from "./auth/routes.js"
 
 const app = express();
 const DB_PORT = process.env.DB_PORT;

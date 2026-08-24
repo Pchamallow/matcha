@@ -30,7 +30,7 @@ router.get('/checkEmail', async (req, res) => {
 	{
 		res.status(500).send("DNS's MX check error : " + error.message);
 	}
-})
+});
 
 router.post('/sendEmail', async (req, res) => {
 	const { email } = req.body;
@@ -41,12 +41,23 @@ router.post('/sendEmail', async (req, res) => {
 		return res.status(400).send("Bad request: Wrong email");
 	try
 	{
+		const token = crypto.randomUUID().replaceAll("-", "");
 		await transporter.sendMail({
 			from: process.env.EMAIL_USER,
 			to: email,
 			subject: "Clownder - Verify your email",
-			text: "UUUUU je suius yun virus2 qaahaha!!!!"
+			text: `http://localhost:5173/?verify=${token}`
 		});
+		const response = await fetch("http://localhost:3001/api/db/registerEmail", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({email, token})
+		});
+		if (!response.ok)
+		{
+			console.log("Error while registering token to database: " + error.message);
+			throw await response.text();
+		}
 		return res.status(200).send();
 	} catch (error)
 	{

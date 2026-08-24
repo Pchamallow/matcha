@@ -33,7 +33,7 @@ function Register() {
 
 			const checkEmail = await fetch(`http://localhost:3001/api/auth/checkEmail?email=${email}`);
 
-			if (checkEmail.status != 200)
+			if (!checkEmail.ok)
 			{
 				alert("Invalid email.");
 				throw await checkEmail.text();
@@ -45,7 +45,7 @@ function Register() {
 				body: JSON.stringify({username, password, first_name, last_name, gender, email, city})
 			});
 
-			if (addUser.status != 201)
+			if (!addUser.ok)
 			{
 				alert("Error!");
 				throw await addUser.text();
@@ -56,10 +56,9 @@ function Register() {
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({email})
 			});
-
-			if (sendEmail.status != 200)
+			if (!sendEmail.ok)
 			{
-				alert("Error in sending confirmation mail!");
+				alert("Error!");
 				throw await sendEmail.text();
 			}
 
@@ -163,7 +162,7 @@ function Register() {
 						<option value="">Gender...</option>
 						<option value="F">Female</option>
 						<option value="M">Male</option>
-						<option value="N">Non specified</option>
+						<option value="N">Not specified</option>
 					</select>
 					<input id="input-email" type="text" placeholder="Email" autoComplete="email" value={email}
 						onChange={(event) => updateEmail(event.target.value)}/>

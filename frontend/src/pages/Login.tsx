@@ -30,14 +30,16 @@ function Login() {
 				alert("Log in successfully");
 				const expirationDate = new Date();
 				expirationDate.setDate(expirationDate.getDate() + 1);
-				cookies.set(user, token, {
+				cookies.set("sessionToken", token, {
 					maxAge: 3600, path: '/' });
-				const value = cookies.get(user);
+				const value = cookies.get("sessionToken");
 				getUserSession(token); // tests wip
 				console.log(value);
 				console.log(await response.text());
-				navigate("/");
+				navigate("/profile");
 			}
+			else if (response.status == 500)
+				throw await response.text();
 		} catch (error) {
 			console.error("Login error :", error);
 		}

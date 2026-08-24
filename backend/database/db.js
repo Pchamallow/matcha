@@ -40,8 +40,9 @@ await db.exec(`
 	);
 `);
 
+// Default user for testing purposes
 await db.exec(`
-	INSERT INTO users (
+	INSERT OR IGNORE INTO users (
 		username,
 		password,
 		first_name,
