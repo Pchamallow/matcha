@@ -40,4 +40,28 @@ await db.exec(`
 	);
 `);
 
+await db.exec(`
+	INSERT INTO users (
+		username,
+		password,
+		first_name,
+		last_name,
+		gender,
+		email,
+		email_verified,
+		fame_rating,
+		city)
+	VALUES (
+		"d",
+		"d",
+		"d",
+		"d",
+		"F",
+		"d",
+		1,
+		1000000,
+		"d"
+	);
+`);
+
 export default db;

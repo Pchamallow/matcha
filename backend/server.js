@@ -5,8 +5,8 @@ import { router as dbRoutes } from "./database/routes.js"
 import { router as authRoutes } from "./authentification/routes.js"
 
 const app = express();
-const DB_PORT = 3000;
-const AUTH_PORT = 3001;
+const DB_PORT = process.env.DB_PORT;
+const AUTH_PORT = process.env.AUTH_PORT;
 
 app.use(express.json());
 app.use(cors());
