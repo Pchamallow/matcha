@@ -32,13 +32,6 @@ function Register() {
 				return;
 			}
 
-			// const isUsernameOrEmail = await fetch(`http://localhost:3001/api/db/isUsernameOrEmail?username=${username}&email=${email}`);
-			// if (isUsernameOrEmail.status !== 200)
-			// {
-			// 	alert("Username or Email already exists.");
-			// 	throw await isUsernameOrEmail.text();
-			// }
-
 			const checkEmail = await fetch(`http://localhost:3001/api/auth/checkEmail?email=${email}`);
 
 			if (!checkEmail.ok)
@@ -55,16 +48,15 @@ function Register() {
 
 			if (addUser.status === 409)
 			{
-				alert("Username or email already exist.");
+				const { usernameTaken, emailTaken } = await addUser.json();
+				if (usernameTaken && emailTaken)
+					alert("Username and email are already taken.");
+				else if (usernameTaken)
+					alert("Username is already taken.");
+				else if (emailTaken)
+					alert("Email is already taken.");
 				throw await addUser.text();
 			}
-
-			if (addUser.status === 409)
-			{
-				alert("Username or email already exist.");
-				throw await addUser.text();
-			}
-			
 
 			if (!addUser.ok)
 			{
