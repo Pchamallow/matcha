@@ -2,7 +2,7 @@ import { useState } from "react";
 import {Eye, EyeOff} from "lucide-react";
 import Cookies from 'universal-cookie';
 import { useNavigate } from "react-router-dom";
-
+import { useAuth, User } from "../AuthProvider";
 
 function Login() {
 	const [user, setUser] = useState("");
@@ -11,6 +11,7 @@ function Login() {
 	const cookies = new Cookies();
 	const handleToggle = () => setShowPassword((prev) => !prev);
 	const navigate = useNavigate();
+	const auth = useAuth();
 
 	async function login() {
 		try {
@@ -39,9 +40,10 @@ function Login() {
 				cookies.set("sessionToken", token, {
 					maxAge: 3600, path: '/' });
 				const value = cookies.get("sessionToken");
-				getUserSession(token); // tests wip
+				const user: User = await response.json();
+				auth.setUser(user);
+				auth.setLoading(false);
 				console.log(value);
-				console.log(await response.text());
 				navigate("/profile");
 			}
 			else if (response.status == 500)
@@ -75,26 +77,6 @@ function Login() {
 			</div>
 		</>
 	);
-}
-
-// renseigner sur une strcut user qui contient ous les infos username, last name etc sans password 
-// cette struct va etre renvoyer par le get session
-// faire une fonction pour le getsession
-
-async function getUserSession(token: string) {
-
-	try{
-		const response = await fetch(`http://localhost:3000/api/db/getSession?token=${token}`);
-		if (response.status == 404)
-			alert("User isn't login");
-		else if (response.status == 500)
-			console.error("Login error : database");
-		else
-			console.log("User is login");
-		return (response);
-	} catch (error) {
-		console.error("Login error :", error);
-	}
 }
 
 export default Login;

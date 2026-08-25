@@ -92,11 +92,25 @@ router.post('/login', async (req, res) => {
 		const startDate = new Date();
 		const endDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
-		await db.run("INSERT INTO `user_sessions` (username, token, start_date, end_date) VALUES (?,?,?,?)",
-			[username, token, startDate.getTime(), endDate.getTime()]);
+		await db.run("INSERT INTO `user_sessions` (username, token, start_date, end_date) VALUES (:username,:token,:startDate,:endDate) \
+				ON CONFLICT(username) DO UPDATE SET token=:token, start_date=:startDate, end_date=:endDate",
+			{
+				":username": username,
+				":token": token,
+				":startDate":startDate.getTime(),
+				":endDate":endDate.getTime()
+			}
+		);
 
 		console.log(username + " logged in");
-		return res.status(200).send("login successfully, yeay !");
+		return res.status(200).send({
+			username: user.username,
+			first_name: user.first_name,
+			last_name: user.last_name,
+			email: user.email,
+			gender: user.gender,
+			city: user.city
+		});
 	}
 	catch (error)
 	{

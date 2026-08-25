@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useAuth } from "../AuthProvider";
 
 function Home() {
 	const navigate = useNavigate();
-	
+	const auth = useAuth();
+
 	useEffect(() => {
 		const params = new URLSearchParams(window.location.search);
 		const emailToken = params.get('verify');
