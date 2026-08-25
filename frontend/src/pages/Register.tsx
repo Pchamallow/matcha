@@ -12,6 +12,7 @@ function Register() {
 	const [city, setCity] = useState("");
 
 	const navigate = useNavigate();
+	const saltRounds = 10;
 
 	async function register() {
 		try {
@@ -31,6 +32,13 @@ function Register() {
 				return;
 			}
 
+			// const isUsernameOrEmail = await fetch(`http://localhost:3001/api/db/isUsernameOrEmail?username=${username}&email=${email}`);
+			// if (isUsernameOrEmail.status !== 200)
+			// {
+			// 	alert("Username or Email already exists.");
+			// 	throw await isUsernameOrEmail.text();
+			// }
+
 			const checkEmail = await fetch(`http://localhost:3001/api/auth/checkEmail?email=${email}`);
 
 			if (!checkEmail.ok)
@@ -44,6 +52,19 @@ function Register() {
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({username, password, first_name, last_name, gender, email, city})
 			});
+
+			if (addUser.status === 409)
+			{
+				alert("Username or email already exist.");
+				throw await addUser.text();
+			}
+
+			if (addUser.status === 409)
+			{
+				alert("Username or email already exist.");
+				throw await addUser.text();
+			}
+			
 
 			if (!addUser.ok)
 			{
@@ -65,7 +86,7 @@ function Register() {
 			alert(`A confirmation Email was sent to your inbox at: ${email}`);
 			navigate("/");
 		} catch (error) {
-			console.error("pas bien bouhhh :", error);
+			console.error("Register error :", error);
 		}
 	}
 

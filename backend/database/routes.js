@@ -1,4 +1,5 @@
 import express from "express";
+import bcrypt from "bcrypt";
 import db from "./db.js";
 
 const router = express.Router();
@@ -9,14 +10,29 @@ router.post('/addUser', async (req, res) => {
 		return res.status(400).send("Bad request");
 	try
 	{
+		const hashedPassword = await bcrypt.hash(password, 10);
 		await db.run("INSERT INTO `users` (username, password, first_name, last_name, gender, email, city) VALUES (?,?,?,?,?,?,?)",
-			[username, password, first_name, last_name, gender, email, city]
+			[username, hashedPassword, first_name, last_name, gender, email, city]
 		);
 
-		console.log(username + " logged.");
-	} catch (error)
+		console.log(username + " logged");
+	}
+	catch (error)
 	{
-		console.error("grosse erreur!!! : " + error.message);
+		if (error.code === 'SQLITE_CONSTRAINT')
+		{
+			// on essaie de savoir quel champ a causé le conflit
+			const isUsername = error.message.includes('users.username');
+			const isEmail = error.message.includes('users.email');
+			
+			console.log("addUser: sql error");
+
+			return res.status(409).json({
+				usernameTaken: isUsername,
+				emailTaken: isEmail
+			});
+		}
+		console.error("addUser : " + error.message);
 		res.status(500).send(error.message);
 		return;
 	}
@@ -43,7 +59,8 @@ router.get('/getUser', async (req, res) => {
 			});
 		}
 		res.status(404).send();
-	} catch (error)
+	}
+	catch (error)
 	{
 		console.error("Sql error : " + error.message);
 		res.status(500).send(error.message);
@@ -72,10 +89,11 @@ router.post('/login', async (req, res) => {
 			const endDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
 			await db.run("INSERT INTO `user_sessions` (username, token, start_date, end_date) VALUES (?,?,?,?)",
 				[username, token, startDate.getTime(), endDate.getTime()]);
-			return res.status(200).send("Back: Login successfully, yeay !");
+			return res.status(200).send("login successfully, yeay !");
 		}
 		res.status(404).send();
-	} catch (error)
+	}
+	catch (error)
 	{
 		console.error("Sql error : " + error.message);
 		res.status(500).send(error.message);
@@ -88,7 +106,7 @@ router.get('/getSession', async (req, res) => {
 		return res.status(400).send("Bad request");
 	try
 	{
-		const row = await db.get("SELECT username, first_name, last_name, gender, email, fame_rating, city FROM users WHERE username \
+		const row = await db.get("SELECT username, first_name, last_name, gender, email, email_verified, fame_rating, city FROM users WHERE username \
 				= (SELECT username FROM `user_sessions` WHERE `token` = ?)",
 			[token])
 		if (row)
@@ -103,10 +121,37 @@ router.get('/getSession', async (req, res) => {
 			});
 		}
 		res.status(404).send(`${username} token not found in database.`);
-	} catch (error)
+	}
+	catch (error)
 	{
-		console.error("Sql error : " + error.message);
-		res.status(500).send(error.message);
+		console.error("getSession : " + error.message);
+		res.status(500).send();
+	}
+})
+
+router.get('/isUsernameOrEmail', async (req, res) => {
+	const { username, email } = req.query;
+	if (!username || !email)
+		return res.status(400).send("Bad request");
+	try
+	{
+		const row = await db.get(
+			"SELECT SUM(CASE WHEN `username` = ? THEN 1 ELSE 0 END) AS usernameCount, \
+				SUM(CASE WHEN `email` = ? THEN 1 ELSE 0 END) AS emailCount \
+			FROM `users` WHERE `username` = ? OR `email` = ?",
+			[username, email, username, email]
+		);
+		const usernameTaken = row.usernameCount > 0;
+		const emailTaken = row.emailCount > 0;
+		console.log(row);
+		if (usernameTaken || emailTaken)
+			return res.status(409).sjson({ usernameTaken, emailTaken });
+		return res.status(200).send(row);
+	}
+	catch (error)
+	{
+		console.error("isUsernameOrEmail : " + error.message);
+		res.status(500).send();
 	}
 });
 
@@ -145,5 +190,3 @@ router.post('/verifyEmail', async (req, res) => {
 });
 
 export { router };
-
-// ELECT (username, first_name, last_name, gender, email, fame_rating, city) FROM users WHERE username = (SELECT username FROM `user_sessions` WHERE `token` = ddd3e69e-1037-482e-bd0b-dcb24857584a)
