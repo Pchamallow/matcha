@@ -54,7 +54,7 @@ await db.exec(`
 		city)
 	VALUES (
 		"d",
-		"d",
+		"$2b$10$24jTzz7F3aRE9BD.iet.Xuph19.jJMilmsTgj1kpg1PqGiDqL/MvK",
 		"d",
 		"d",
 		"F",
