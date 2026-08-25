@@ -24,7 +24,13 @@ function Login() {
 			if (response.status == 400)
 				alert("Username or password missing");
 			else if (response.status == 404)
-				alert("Invalid username/email or password");
+			{
+				const { user, password } = await response.json();
+				if (user)
+					alert("Invalid username/email");
+				else if (password)
+					alert("Invalid password");
+			}
 			else if (response.status == 200)
 			{
 				alert("Log in successfully");
