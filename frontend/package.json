@@ -10,6 +10,7 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
+		"@vitejs/plugin-react": "^6.1.0",
 		"@types/react": "^19.2.18",
 		"@types/react-dom": "^19.2.4",
 		"@types/node": "20.19.4",
@@ -17,7 +18,7 @@
 		"react-router-dom": "^7.18.2",
 		"react": "^19.2.8",
 		"typescript": "5.8.3",
-		"vite": "^7.3.6",
+		"vite": "^8.2.2",
 		"universal-cookie": "^8.1.2",
 		"lucide-react": "^1.32.0"
 	}
