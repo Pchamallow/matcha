@@ -25,7 +25,9 @@
 }
 
 .navbar_image {
-	content: url('../../../assets/images/logo.png');
+	margin-left: 1dvh;
+	margin-right: 1dvh;
+	content: url('../../../assets/images/icons/logo.png');
 	display: block;
 	height: 14dvh;
 	width: 14dvh;

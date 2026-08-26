@@ -7,44 +7,52 @@
 	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
 }
 
-.navbar_image {
-	content: url('../../../assets/images/logo.png');
+.navbar-left{
+	display: flex;
+	align-items: center;
+	margin-right: 1dvh;
+	margin-left: 1dvh;
+}
+
+.navbar-right{
+	display: flex;
+	align-items: center;
+	margin-right: 1dvh;
+}
+
+/* Images ------------------------------------------------------ */
+
+.navbar_logo {
+	content: url('../../../assets/images/icons/logo.png');
 	display: block;
 	height: 14dvh;
 	width: 14dvh;
 	height: auto;
 }
 
-.navbar-right{
-	display: flex;
-	align-items: center;
-	margin-right: 1rem;
+.navbar_meet {
+	margin-left: 3dvh;
+	content: url('../../../assets/images/icons/meet.png');
+	display: block;
+	height: 8dvh;
+	width: 8dvh;
+	height: auto;
+	opacity: 0.59;
 }
-
-.navbar-right .cart-icon,
-.navbar-right .user-icon {
-	color: #fff;
-	text-decoration: none;
-	position: relative;
-}
-
-.navbar-right .cart-count {
-	background-color: #f44336;
-	color: #fff;
-	border-radius: 50%;
-	padding: 0.2rem 0.5rem;
-	font-size: 0.8rem;
-	position: absolute;
-	top: -0.5rem;
-	right: -0.5rem;
-}
-
-
-/* Images ------------------------------------------------------ */
 
 .navbar_messageBox {
 	margin-right: 3dvh;
-	content: url('../../../assets/images/messageBox.png');
+	content: url('../../../assets/images/icons/messageBox.png');
+	display: block;
+	height: 8dvh;
+	width: 8dvh;
+	height: auto;
+	opacity: 0.59;
+}
+
+.navbar_messageBox {
+	margin-right: 3dvh;
+	content: url('../../../assets/images/icons/messageBox.png');
 	display: block;
 	height: 8dvh;
 	width: 8dvh;
@@ -54,7 +62,7 @@
 
 .navbar_heart {
 	margin-right: 3dvh;
-	content: url('../../../assets/images/heart.png');
+	content: url('../../../assets/images/icons/heart.png');
 	display: block;
 	height: 8dvh;
 	width: 8dvh;
@@ -64,7 +72,7 @@
 
 .navbar_notifs {
 	margin-right: 3dvh;
-	content: url('../../../assets/images/notifs.png');
+	content: url('../../../assets/images/icons/notifs.png');
 	display: block;
 	height: 6dvh;
 	width: 6dvh;
@@ -72,7 +80,7 @@
 }
 
 .navbar_myProfile {
-	content: url('../../../assets/images/myProfile.png');
+	content: url('../../../assets/images/icons/myProfile.png');
 	display: block;
 	height: 8dvh;
 	width: 8dvh;

@@ -12,3 +12,20 @@
 	font-size: 40px;
 	font-weight: bold;
 }
+
+.image {
+	margin: 1dvh;
+	content: url('../assets/images/profiles/profile_pictures.png');
+	display: block;
+	height: 30dvh;
+	width: 30dvh;
+	height: auto;
+	border-radius: 2rem;
+}
+
+.background{
+	height: 100dvh;
+	background:#fffbc275;
+	margin: 0;
+	padding-top: 0%;
+}
