@@ -1,6 +1,4 @@
 
-/* Logout ------------------------------------------------------ */
-
 .navbar{
 	display: flex;
 	justify-content: space-between;
@@ -40,3 +38,48 @@
 	top: -0.5rem;
 	right: -0.5rem;
 }
+
+
+/* Images ------------------------------------------------------ */
+
+.navbar_messageBox {
+	margin-right: 3dvh;
+	content: url('../../../assets/images/messageBox.png');
+	display: block;
+	height: 8dvh;
+	width: 8dvh;
+	height: auto;
+	opacity: 0.59;
+}
+
+.navbar_heart {
+	margin-right: 3dvh;
+	content: url('../../../assets/images/heart.png');
+	display: block;
+	height: 8dvh;
+	width: 8dvh;
+	height: auto;
+	opacity: 0.9;
+}
+
+.navbar_notifs {
+	margin-right: 3dvh;
+	content: url('../../../assets/images/notifs.png');
+	display: block;
+	height: 6dvh;
+	width: 6dvh;
+	height: auto;
+}
+
+.navbar_myProfile {
+	content: url('../../../assets/images/myProfile.png');
+	display: block;
+	height: 8dvh;
+	width: 8dvh;
+	height: auto;
+	opacity: 0.59;
+}
+
+/* mettre en place responsive 
+-> si la fenetre est trop reduite
+-> icon qui passe en menu  */

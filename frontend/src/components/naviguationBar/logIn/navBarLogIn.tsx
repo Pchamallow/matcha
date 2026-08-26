@@ -4,10 +4,12 @@ function NavBarLogIn() {
 
 	return (
 		<nav className="navbar">
-			<div className="navbar_image"></div>
+			<a href="logo" className="navbar_image"></a>
 			<div className="navbar-right">
-				<a className="messageBox" href="coucou"></a>
-				salut
+				<a href="#messageBox" className="navbar_messageBox"></a>
+				<a href="#likes" className="navbar_heart"></a>
+				<a href="#notifications" className="navbar_notifs"></a>
+				<a href="#myProfile" className="navbar_myProfile"></a>
 			</div>
 		</nav>
 	);
