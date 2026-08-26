@@ -53,9 +53,9 @@ function Home() {
 			</header>
 			<div className="background">
 				<div id="home">
-					<button onClick={register}>Register</button>
-					<button onClick={login}>Login</button>
-					<button>Logout</button>
+					<div className="button" onClick={register}>Register</div>
+					<div className="button" onClick={login}>Login</div>
+					<div className="button" >Logout</div>
 				</div>
 			</div>
 		</>
