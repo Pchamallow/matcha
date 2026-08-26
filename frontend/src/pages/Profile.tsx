@@ -1,5 +1,5 @@
 import { useAuth } from '../AuthProvider'
-import NavBar from "../components/naviguationBar/navBar";
+import NavBarLogIn from "../components/naviguationBar/logIn/navBarLogIn";
 
 function Profile() {
 	const { user } = useAuth();
@@ -9,7 +9,7 @@ function Profile() {
 	return (
 		<>
 			<header>
-				<NavBar isLogin={true}></NavBar>
+				<NavBarLogIn></NavBarLogIn>
 			</header>
 			<div className="background">
 				<div id="profile">

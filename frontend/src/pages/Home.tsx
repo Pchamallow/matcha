@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuth } from "../AuthProvider";
 import ButtonCust from "../components/buttons/buttonCust";
-import NavBar from "../components/naviguationBar/navBar";
+import NavBarLogOut from "../components/naviguationBar/logOut/navBarLogOut";
 
 function Home() {
 	const navigate = useNavigate();
@@ -45,13 +45,13 @@ function Home() {
 	return (
 		<>
 			<header>
-				<NavBar></NavBar>
+				<NavBarLogOut></NavBarLogOut>
 			</header>
 			<div className="background">
 				<div id="home">
-					<ButtonCust name="Register" naviguate={register}></ButtonCust>
-					<ButtonCust name="Login" naviguate={login}></ButtonCust>
-					<ButtonCust name="Logout"></ButtonCust>
+					<ButtonCust label="Register" naviguate={register}></ButtonCust>
+					<ButtonCust label="Login" naviguate={login}></ButtonCust>
+					<ButtonCust label="Logout"></ButtonCust>
 				</div>
 			</div>
 		</>

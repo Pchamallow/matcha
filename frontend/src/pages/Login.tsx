@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 import { useNavigate } from "react-router-dom";
 import { useAuth, User } from "../AuthProvider";
 import ButtonCust from "../components/buttons/buttonCust";
-import NavBar from "../components/naviguationBar/navBar";
+import NavBarLogOut from "../components/naviguationBar/logOut/navBarLogOut";
 
 function Login() {
 	const [user, setUser] = useState("");
@@ -58,7 +58,7 @@ function Login() {
 	return (
 		<>
 			<header>
-				<NavBar></NavBar>
+				<NavBarLogOut></NavBarLogOut>
 			</header>
 			<div className="background">
 				<div id="login">
@@ -76,7 +76,7 @@ function Login() {
 						onChange={(e) => setPassword(e.target.value)}
 						autoComplete="current-password"
 					/>
-					<ButtonCust name="Login" naviguate={login}></ButtonCust>
+					<ButtonCust label="Login" naviguate={login}></ButtonCust>
 					{/* <button onClick={login}>Login</button> */}
 				</div>
 			</div>
