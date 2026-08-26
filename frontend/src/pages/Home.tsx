@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuth } from "../AuthProvider";
+import logo from "../assets/logo.png";
 
 function Home() {
 	const navigate = useNavigate();
@@ -43,8 +44,9 @@ function Home() {
 	return (
 		<>
 			<header>
-				<div className="banner">
-					<div className="banner__text">
+				<div className="navbar">
+					<div className="navbar_image"></div>
+					<div className="navbar_text">
 						Clownder
 					</div>
 				</div>

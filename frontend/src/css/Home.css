@@ -21,24 +21,39 @@
 	padding: 0 10px;
 }
 
-.banner{
+.navbar{
+	width: 100%;
 	background:#936a9d;
-	min-height: 6dvh;
-	max-height: 6dvh;
+	min-height: 12dvh;
+	max-height: 12dvh;
 	margin: 0;
+	padding: 0;
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	padding: 20px 0;
+	justify-content: flex-start;
+	overflow: hidden;
+	text-align: left;
 }
 
-.banner__text {
-	font: 1.2em serif;
+.navbar_text {
+	/* font: 1.2em serif; */
+	font-family: Courier New, Luminari, fantasy;
+	/* font-family: "Luminari", Luminari, serif;
 	color: hsla(0, 0%, 98%, 0.5);
-	font-size: clamp(5rem, 8vw, 20rem);
-	padding: 20px;
+	font-size: clamp(1rem, 8vw, 5rem);
+	padding: 20;
 	width: 10em;
-	text-align: center;
+	margin: 2dvh; */
+	text-align: left;
+}
+
+.navbar_image {
+	content: url('../assets/images/logo.png');
+	display: block;
+	/* margin-right: 10px; */
+	height: 14dvh;
+	width: 14dvh;
+	height: auto;
 }
 
 .background{
