@@ -1,14 +1,17 @@
 import React from 'react';
 import "./buttonCust.css";
 
-type ButtonProps = {
-  children: React.ReactNode;
-};
+export interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+	name: string;
+	naviguate?: () => void;
+}
 
-function ButtonCust({ children }: ButtonProps) {
+function ButtonCust(props: Props) {
+	 const { name, naviguate, ...rest } = props;
+
 	return (
-		<div className='buttonCust'>
-			{children}
+		<div className='buttonCust' onClick={naviguate}>
+			{name}
 		</div>
 	);
 }

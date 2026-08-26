@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuth } from "../AuthProvider";
-import ButtonCust from "../components/buttons/buttonCust"
-
+import ButtonCust from "../components/buttons/buttonCust";
+import NavBar from "../components/naviguationBar/navBar";
 
 function Home() {
 	const navigate = useNavigate();
@@ -45,19 +45,19 @@ function Home() {
 	return (
 		<>
 			<header>
-				<div className="navbar">
+				<NavBar></NavBar>
+				{/* <div className="navbar">
 					<div className="navbar_image"></div>
 					<div className="navbar_text">
 						Clownder
 					</div>
-				</div>
+				</div> */}
 			</header>
 			<div className="background">
 				<div id="home">
-					<ButtonCust>Coucou</ButtonCust>
-					<div className="button" onClick={register}>Register</div>
-					<div className="button" onClick={login}>Login</div>
-					<div className="button">Logout</div>
+					<ButtonCust name="Register" naviguate={register}></ButtonCust>
+					<ButtonCust name="Login" naviguate={login}></ButtonCust>
+					<ButtonCust name="Logout"></ButtonCust>
 				</div>
 			</div>
 		</>

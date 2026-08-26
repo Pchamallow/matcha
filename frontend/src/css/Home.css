@@ -10,36 +10,7 @@
 	src: url(../assets/fonts/Arizonia/Arizonia-Regular.ttf);
 }
 
-/* Button with animated shadow ---------------------------------------- */
-.button {
-	display: block;
-	transform: perspective(1px) translateZ(0);
-	box-shadow: 0 0 1px transparent;
-	margin: auto;
-	margin-top: 30px;
-	transition-duration: 0.3s;
-	transition-property: box-shadow, transform;
-}
-
-.button:hover,
-.button:focus,
-.button:active {
-	box-shadow: 0px 10px 30px -10px rgba(0, 0, 24, 0.5);
-}
-
-.button {
-	width:90%;
-	max-width: 350px;
-	padding: 1dvh 2dvh;
-	display: block;
-	font-size: clamp(16px, 4vw, 20px);
-	color: rgb(252, 252, 251);
-	background: #a484ac;
-	border-radius: 16rem;
-}
-/* ------------------------------------------------------------------ */
-
-.navbar{
+.navbar2{
 	width: 100%;
 	background:#a484ac;
 	min-height: 12dvh;
@@ -54,7 +25,7 @@
 	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
 }
 
-.navbar_text {
+.navbar2_text {
 	font-family: arizonia;
 	color: hsla(0, 0%, 98%, 0.8);
 	font-size: clamp(1rem, 8vw, 5rem);
@@ -64,7 +35,7 @@
 	text-align: left;
 }
 
-.navbar_image {
+.navbar2_image {
 	content: url('../assets/images/logo.png');
 	display: block;
 	height: 14dvh;

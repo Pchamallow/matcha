@@ -1,4 +1,5 @@
 /* Button with animated shadow ---------------------------------------- */
+
 .buttonCust {
 	display: block;
 	transform: perspective(1px) translateZ(0);
@@ -22,7 +23,6 @@
 	display: block;
 	font-size: clamp(16px, 4vw, 20px);
 	color: rgb(252, 252, 251);
-	background: #a484ac;
+	background: #ab95b1;
 	border-radius: 16rem;
 }
-/* ------------------------------------------------------------------ */

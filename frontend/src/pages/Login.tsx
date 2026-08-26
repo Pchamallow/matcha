@@ -3,6 +3,7 @@ import {Eye, EyeOff} from "lucide-react";
 import Cookies from 'universal-cookie';
 import { useNavigate } from "react-router-dom";
 import { useAuth, User } from "../AuthProvider";
+import ButtonCust from "../components/buttons/buttonCust";
 
 function Login() {
 	const [user, setUser] = useState("");
@@ -79,7 +80,8 @@ function Login() {
 						onChange={(e) => setPassword(e.target.value)}
 						autoComplete="current-password"
 					/>
-					<button onClick={login}>Login</button>
+					<ButtonCust name="Login" naviguate={login}></ButtonCust>
+					{/* <button onClick={login}>Login</button> */}
 				</div>
 			</div>
 		</>
