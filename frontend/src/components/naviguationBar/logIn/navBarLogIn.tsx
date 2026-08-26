@@ -3,12 +3,13 @@ import "./navBarLogIn.css";
 function NavBarLogIn() {
 
 	return (
-		<div className="navbar">
+		<nav className="navbar">
 			<div className="navbar_image"></div>
-			<div className="navbar_text">
-				Clownder
+			<div className="navbar-right">
+				<a className="messageBox" href="coucou"></a>
+				salut
 			</div>
-		</div>
+		</nav>
 	);
 }
 
