@@ -10,6 +10,7 @@
 	src: url(../assets/fonts/Arizonia/Arizonia-Regular.ttf);
 }
 
+/* Button with animated shadow ---------------------------------------- */
 .button {
 	display: block;
 	transform: perspective(1px) translateZ(0);
@@ -29,15 +30,14 @@
 .button {
 	width:90%;
 	max-width: 350px;
-	height: 10px;
-	padding: 16px 24px;
+	padding: 1dvh 2dvh;
 	display: block;
 	font-size: clamp(16px, 4vw, 20px);
 	color: rgb(252, 252, 251);
 	background: #a484ac;
-	border-radius: 8px;
+	border-radius: 16rem;
 }
-
+/* ------------------------------------------------------------------ */
 
 .navbar{
 	width: 100%;

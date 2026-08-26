@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuth } from "../AuthProvider";
-import logo from "../assets/logo.png";
+import ButtonCust from "../components/buttons/buttonCust"
+
 
 function Home() {
 	const navigate = useNavigate();
@@ -53,9 +54,10 @@ function Home() {
 			</header>
 			<div className="background">
 				<div id="home">
+					<ButtonCust>Coucou</ButtonCust>
 					<div className="button" onClick={register}>Register</div>
 					<div className="button" onClick={login}>Login</div>
-					<div className="button" >Logout</div>
+					<div className="button">Logout</div>
 				</div>
 			</div>
 		</>

@@ -55,7 +55,14 @@ function Login() {
 
 	return (
 		<>
-			<div className="banner"> </div>
+			<header>
+				<div className="navbar">
+					<div className="navbar_image"></div>
+					<div className="navbar_text">
+						Clownder
+					</div>
+				</div>
+			</header>
 			<div className="background">
 				<div id="login">
 					<input
