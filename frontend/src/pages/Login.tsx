@@ -4,6 +4,7 @@ import Cookies from 'universal-cookie';
 import { useNavigate } from "react-router-dom";
 import { useAuth, User } from "../AuthProvider";
 import ButtonCust from "../components/buttons/buttonCust";
+import NavBar from "../components/naviguationBar/navBar";
 
 function Login() {
 	const [user, setUser] = useState("");
@@ -57,12 +58,7 @@ function Login() {
 	return (
 		<>
 			<header>
-				<div className="navbar">
-					<div className="navbar_image"></div>
-					<div className="navbar_text">
-						Clownder
-					</div>
-				</div>
+				<NavBar></NavBar>
 			</header>
 			<div className="background">
 				<div id="login">

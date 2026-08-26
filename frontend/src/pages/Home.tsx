@@ -46,12 +46,6 @@ function Home() {
 		<>
 			<header>
 				<NavBar></NavBar>
-				{/* <div className="navbar">
-					<div className="navbar_image"></div>
-					<div className="navbar_text">
-						Clownder
-					</div>
-				</div> */}
 			</header>
 			<div className="background">
 				<div id="home">

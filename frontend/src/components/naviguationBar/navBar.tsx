@@ -1,6 +1,12 @@
+import React from 'react';
 import "./navBar.css";
 
-function ButtonCust() {
+export interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+	isLogin?: boolean;
+}
+
+function ButtonCust(props: Props) {
+	 const { isLogin } = props;
 
 	return (
 		<div className='all'>

@@ -31,7 +31,7 @@
 }
 
 .navbar_image {
-	content: url('../assets/images/logo.png');
+	content: url('../../assets/images/logo.png');
 	display: block;
 	height: 14dvh;
 	width: 14dvh;
