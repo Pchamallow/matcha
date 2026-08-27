@@ -148,6 +148,25 @@ router.get('/getSession', async (req, res) => {
 	}
 })
 
+router.post('/deleteSession', async (req, res) => {
+	const { username } = req.body;
+	if (!username)
+		return res.status(400).send("Bad request");
+
+	try
+	{
+		await db.run("DELETE FROM `user_sessions` WHERE username=:username",
+				{	":username":username	}
+			);
+		res.status(200).send(`User session successfully deleted.`);
+	}
+	catch (error)
+	{
+		console.error("deleteSession - Sql : " + error.message);
+		res.status(500).send(error.message);
+	}
+});
+
 router.post('/registerEmail', async (req, res) => {
 	const { email, token } = req.body;
 	if (!email || !token)

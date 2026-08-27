@@ -98,3 +98,13 @@
 	width: 8dvh;
 	height: auto;
 }
+
+.navbar_deco {
+	margin-left: 2dvh;
+	content: url('../../../assets/images/icons/deconnect.png');
+	display: block;
+	height: 8dvh;
+	width: 8dvh;
+	height: auto;
+	border-radius: 10rem;
+}
