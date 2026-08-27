@@ -1,8 +1,8 @@
-import "./navBarLogIn.css";
 import Cookies from "universal-cookie";
-import { Outlet, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../AuthProvider";
+import SearchBar from "../searchBar/searchBar";
+import "./navBarLogIn.css";
 
 function NavBarLogIn() {
 
@@ -41,9 +41,11 @@ function NavBarLogIn() {
 		<nav className="navbar">
 			<div className="navbar-left">
 				<a href="#logo-clownder" className="navbar_logo"></a>
+				<SearchBar></SearchBar>
+				{/* pose probeme avce la navbarlogout */}
 				<div id="navbar-left">
-					<input className="search" placeholder="Search..">
-					</input>
+					{/* <input className="search" placeholder="Search..">
+					</input> */}
 				</div>
 				<a href="#meet" className="navbar_meet"></a>
 			</div>

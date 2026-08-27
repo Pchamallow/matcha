@@ -38,24 +38,18 @@ router.post('/addUser', async (req, res) => {
 	res.status(201).send();
 });
 
-router.get('/getUser', async (req, res) => {
-	const { username } = req.body;
-	if (!username)
+// changer pour ne renvoyer que les username pas le reste
+router.get('/getUsers', async (req, res) => {
+	const { input } = req.query;
+	if (!input)
 		return res.status(400).send("Bad request");
 	try
 	{
-		const row = await db.get("SELECT * FROM `users` WHERE `username` = ?",
-			[username]);
+		const row = await db.all("SELECT * FROM `users` WHERE `username` LIKE ?",
+			[`${input}%`]);
 		if (row)
 		{
-			return res.status(200).send({
-				username: row.username,
-				first_name: row.first_name,
-				last_name: row.last_name,
-				gender: row.gender,
-				email: row.email,
-				city: row.city
-			});
+			return res.status(200).send(row);
 		}
 		res.status(404).send();
 	}
