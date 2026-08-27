@@ -77,7 +77,6 @@ function Login() {
 						autoComplete="current-password"
 					/>
 					<ButtonCust label="Login" naviguate={login}></ButtonCust>
-					{/* <button onClick={login}>Login</button> */}
 				</div>
 			</div>
 		</>
