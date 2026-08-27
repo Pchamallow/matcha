@@ -1,23 +1,38 @@
 
-.navbar{
+.navbar {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background:#a484ac;
+	background:#c9b5c2;
 	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+	width:100%;
 }
 
-.navbar-left{
+.navbar-left {
 	display: flex;
 	align-items: center;
 	margin-right: 1dvh;
 	margin-left: 1dvh;
 }
 
-.navbar-right{
+.navbar-right {
 	display: flex;
 	align-items: center;
 	margin-right: 1dvh;
+}
+
+#navbar-left input {
+	width: 90%;
+	max-width: 450px;
+	height: 5dvh;
+	margin: auto;
+	margin-top: 2dvh;
+	margin-left: 2dvh;
+	display: block;
+	border-radius: 16rem;
+	border-style: none;
+	font-size: 20px;
+	background:#ffffff75;
 }
 
 /* Images ------------------------------------------------------ */
@@ -30,6 +45,16 @@
 	height: auto;
 }
 
+.navbar_search {
+	content: url('../../../assets/images/icons/search.png');
+	display: block;
+	margin-left: 1dvh;
+	margin-top: 0.5dvh;
+	height: 4dvh;
+	width: 4dvh;
+	height: auto;
+}
+
 .navbar_meet {
 	margin-left: 3dvh;
 	content: url('../../../assets/images/icons/meet.png');
@@ -37,7 +62,6 @@
 	height: 8dvh;
 	width: 8dvh;
 	height: auto;
-	opacity: 0.59;
 }
 
 .navbar_messageBox {
@@ -47,32 +71,20 @@
 	height: 8dvh;
 	width: 8dvh;
 	height: auto;
-	opacity: 0.59;
-}
-
-.navbar_messageBox {
-	margin-right: 3dvh;
-	content: url('../../../assets/images/icons/messageBox.png');
-	display: block;
-	height: 8dvh;
-	width: 8dvh;
-	height: auto;
-	opacity: 0.59;
 }
 
 .navbar_heart {
 	margin-right: 3dvh;
-	content: url('../../../assets/images/icons/heart.png');
+	content: url('../../../assets/images/icons/heart_navBar.png');
 	display: block;
 	height: 8dvh;
 	width: 8dvh;
 	height: auto;
-	opacity: 0.9;
 }
 
 .navbar_notifs {
 	margin-right: 3dvh;
-	content: url('../../../assets/images/icons/notifs.png');
+	content: url('../../../assets/images/icons/bell.png');
 	display: block;
 	height: 6dvh;
 	width: 6dvh;
@@ -85,9 +97,4 @@
 	height: 8dvh;
 	width: 8dvh;
 	height: auto;
-	opacity: 0.59;
 }
-
-/* mettre en place responsive 
--> si la fenetre est trop reduite
--> icon qui passe en menu  */

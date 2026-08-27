@@ -6,6 +6,10 @@ function NavBarLogIn() {
 		<nav className="navbar">
 			<div className="navbar-left">
 				<a href="#logo-clownder" className="navbar_logo"></a>
+				<div id="navbar-left">
+					<input className="search" placeholder="Search..">
+					</input>
+				</div>
 				<a href="#meet" className="navbar_meet"></a>
 			</div>
 			<div className="navbar-right">
