@@ -15,12 +15,15 @@
 
 .image {
 	margin: 1dvh;
-	content: url('../assets/images/profiles/profile_pictures.png');
+	content: url('../assets/images/profiles/profil_000.png');
 	display: block;
 	height: 30dvh;
 	width: 30dvh;
 	height: auto;
 	border-radius: 2rem;
+	border-style: solid;
+	border-width: 3px;
+	border-color: #816c87;
 }
 
 .background{
