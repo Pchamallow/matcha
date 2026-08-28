@@ -45,7 +45,7 @@ router.get('/getUsers', async (req, res) => {
 		return res.status(400).send("Bad request");
 	try
 	{
-		const row = await db.all("SELECT * FROM `users` WHERE `username` LIKE ?",
+		const row = await db.all("SELECT `username` FROM `users` WHERE `username` LIKE ?",
 			[`${input}%`]);
 		if (row)
 		{

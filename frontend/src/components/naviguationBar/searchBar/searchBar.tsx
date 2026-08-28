@@ -35,31 +35,18 @@ interface SearchBarProps {
 // 	);
 // };
 
-interface User {
-    username: string;
-    first_name: string;
-    last_name: string;
-    gender: string;
-    email: string;
-    city: string;
-}
 
 export const SearchBar = () => {
 	const [ input, setInput ] = useState("");
-	const [ users, setUsers ] = useState<User[]>([]);
+	// const [ users, setUsers ] = useState([]);
 
 	async function fetchData(value: string)
 	{
 
 		const fetchUser = await fetch (`http://localhost:3000/api/db/getUsers?input=${value}`);
-		// const users = await fetchUser.json();
-		 console.log("Réponse reçue :", fetchUser);
-		const users: User[] = await fetchUser.json();
-		// console.log("JSON reçu :", users);
-		// console.log("Type :", typeof users);
-		// console.log("Array ?", Array.isArray(users));
+		console.log("Réponse reçue :", fetchUser);
+		const users = await fetchUser.json();
 		console.log(users);
-		setUsers(users);
 
 	}
 

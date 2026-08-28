@@ -42,7 +42,7 @@ function NavBarLogIn() {
 			<div className="navbar-left">
 				<a href="#logo-clownder" className="navbar_logo"></a>
 				<SearchBar></SearchBar>
-				{/* pose probeme avce la navbarlogout */}
+				{/* avoir la searchbar ici pose probleme avce les input de register et login (case beaucoup + grandes)*/}
 				<div id="navbar-left">
 					{/* <input className="search" placeholder="Search..">
 					</input> */}
