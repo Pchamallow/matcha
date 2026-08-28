@@ -35,19 +35,26 @@ interface SearchBarProps {
 // 	);
 // };
 
+interface SearchResult {
+	username: string;
+	[key: string]: any;
+}
 
-export const SearchBar = () => {
+interface SearchBarProps {
+	setResults: (results: SearchResult[]) => void;
+}
+
+export const SearchBar = ({ setResults }: SearchBarProps) => {
 	const [ input, setInput ] = useState("");
-	// const [ users, setUsers ] = useState([]);
 
 	async function fetchData(value: string)
 	{
-
 		const fetchUser = await fetch (`http://localhost:3000/api/db/getUsers?input=${value}`);
 		console.log("Réponse reçue :", fetchUser);
-		const users = await fetchUser.json();
-		console.log(users);
-
+		const usernames = await fetchUser.json();
+		console.log(usernames);
+		setResults(usernames);
+		// return (usernames);
 	}
 
 	const handleChange = (value: string) => {
@@ -59,15 +66,11 @@ export const SearchBar = () => {
 		<div className='wrapper'>
 			<FaSearch id="searh-icon"/>
 			<input
-				// type="text"
 				placeholder="Search..."
 				value={input}
-				// onChange={(e) => setInput(e.target.value)}
 				onChange={(e) => handleChange(e.target.value)}
-				// aria-label="Search input"
+				aria-label="Search input"
 			/>
-			{/* <p>You are searching for: {searchQuery}</p> */}
-			{/* <p>Debounced search query: {debouncedQuery}</p> */}
 		</div>
 	);
 };
