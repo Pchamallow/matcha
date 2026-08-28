@@ -9,6 +9,15 @@ down:
 
 restart: down up
 
+logs:
+	docker compose logs
+
+logs-frontend:
+	docker compose logs frontend
+
+logs-frontend:
+	docker compose logs backend
+
 clean:
 	@docker compose -f docker-compose.yml down -v --remove-orphans
 
