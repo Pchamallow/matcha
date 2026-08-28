@@ -40,6 +40,14 @@ await db.exec(`
 	);
 `);
 
+await db.exec(`
+	CREATE TABLE IF NOT EXISTS password_tokens (
+		id integer primary key autoincrement,
+		email text not null unique,
+		token text not null unique
+	);
+`);
+
 // Default user for testing purposes
 await db.exec(`
 	INSERT OR IGNORE INTO users (

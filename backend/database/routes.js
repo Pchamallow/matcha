@@ -138,7 +138,7 @@ router.get('/getSession', async (req, res) => {
 	catch (error)
 	{
 		console.error("getSession : " + error.message);
-		res.status(500).send();
+		res.status(500).send(error.message);
 	}
 })
 
@@ -188,6 +188,65 @@ router.post('/verifyEmail', async (req, res) => {
 		if (result.changes == 0)
 			return res.status(400).send("Invalid token");
 		res.status(200).send(`Email verified!`);
+	} catch (error)
+	{
+		console.error("Sql error : " + error.message);
+		res.status(500).send(error.message);
+	}
+});
+
+router.get('/isPasswordResetTokenValid', async (req, res) => {
+	const { token } = req.query;
+	if (!token)
+		return res.status(400).send("Bad request");
+	try
+	{
+		const row = await db.get("SELECT email FROM password_tokens WHERE `token` = ?",
+			[token])
+		if (row)
+			return res.status(200).send();
+		res.status(404).send(`Token ${token} not found in database.`);
+	}
+	catch (error)
+	{
+		console.error("Sql error : " + error.message);
+		res.status(500).send(error.message);
+	}
+})
+
+router.post('/registerPasswordToken', async (req, res) => {
+	const { email, token } = req.body;
+	if (!email || !token)
+		return res.status(400).send("Bad request");
+	try
+	{
+		await db.run("INSERT INTO password_tokens (email, token) VALUES (?,?)",
+			[email, token]);
+		res.status(200).send(`Password token logged!`);
+	} catch (error)
+	{
+		console.error("Sql error : " + error.message);
+		res.status(500).send(error.message);
+	}
+});
+
+router.post('/changePassword', async (req, res) => {
+	const { token, password } = req.body;
+	if (!token || !password)
+		return res.status(400).send("Bad request");
+	try
+	{
+		const hashedPassword = await bcrypt.hash(password, 10);
+		const row = await db.get("SELECT email FROM `password_tokens` WHERE `token` = ?",
+			[token]);
+		if (row.length == 0)
+			throw "Email not found in password tokens.";
+		const email = row.email;
+		await db.run("UPDATE `users` SET `password` = ? WHERE `email` = ?",
+			[hashedPassword, email]);
+		await db.run("DELETE FROM `password_tokens` WHERE `token` = ?",
+			[token]);
+		res.status(200).send(`Password changed for ${email}!`);
 	} catch (error)
 	{
 		console.error("Sql error : " + error.message);

@@ -3,14 +3,14 @@ import { useEffect } from "react";
 import { useAuth } from "../AuthProvider";
 import CustomButton from "../components/buttons/CustomButton";
 import NavBarLogOut from "../components/navigationBar/logOut/navBarLogOut";
+import { useSearchParams } from "react-router-dom";
 
 function Home() {
 	const navigate = useNavigate();
-	const auth = useAuth();
+	const [searchParams] = useSearchParams();
 
 	useEffect(() => {
-		const params = new URLSearchParams(window.location.search);
-		const emailToken = params.get('verify');
+		const emailToken = searchParams.get('verify');
 
 		if (!emailToken)
 			return;

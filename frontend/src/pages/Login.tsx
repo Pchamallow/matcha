@@ -54,6 +54,12 @@ function Login() {
 		}
 	}
 
+
+	function passwordReset()
+	{
+		navigate("/passwordreset");
+	}
+
 	return (
 		<>
 			<header>
@@ -65,6 +71,7 @@ function Login() {
 						type="text"
 						placeholder="Username or email"
 						value={user}
+						autoComplete="username"
 						onChange={(e) => setUser(e.target.value)}
 					/>
 					<input
@@ -75,6 +82,7 @@ function Login() {
 						onChange={(e) => setPassword(e.target.value)}
 						autoComplete="current-password"
 					/>
+					<p id="forgot-password" onClick={(passwordReset)}>Forgot your password?</p>
 					<CustomButton label="Login" navigate={login}></CustomButton>
 				</div>
 			</div>
