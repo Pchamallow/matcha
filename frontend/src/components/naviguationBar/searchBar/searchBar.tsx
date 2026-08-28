@@ -49,7 +49,7 @@ export const SearchBar = ({ setResults }: SearchBarProps) => {
 
 	async function fetchData(value: string)
 	{
-		const fetchUser = await fetch (`http://localhost:3000/api/db/getUsers?input=${value}`);
+		const fetchUser = await fetch (`/api/db/getUsers?input=${value}`);
 		console.log("Réponse reçue :", fetchUser);
 		const usernames = await fetchUser.json();
 		console.log(usernames);

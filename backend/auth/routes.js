@@ -48,7 +48,7 @@ router.post('/sendEmail', async (req, res) => {
 			subject: "Clownder - Verify your email",
 			text: `http://localhost:5173/?verify=${token}`
 		});
-		const response = await fetch("http://localhost:3001/api/db/registerEmail", {
+		const response = await fetch("/api/db/registerEmail", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({email, token})

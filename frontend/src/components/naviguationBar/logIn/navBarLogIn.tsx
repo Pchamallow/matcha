@@ -20,7 +20,7 @@ function NavBarLogIn() {
 
 		try
 		{
-			const deleteSession = await fetch ("http://localhost:3000/api/db/deleteSession", {
+			const deleteSession = await fetch ("/api/db/deleteSession", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify( { username: user?.username} ),

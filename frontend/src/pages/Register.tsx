@@ -34,7 +34,7 @@ function Register() {
 				return;
 			}
 
-			const checkEmail = await fetch(`http://localhost:3001/api/auth/checkEmail?email=${email}`);
+			const checkEmail = await fetch(`/api/auth/checkEmail?email=${email}`);
 
 			if (!checkEmail.ok)
 			{
@@ -42,7 +42,7 @@ function Register() {
 				throw await checkEmail.text();
 			}
 
-			const addUser = await fetch("http://localhost:3000/api/db/addUser", {
+			const addUser = await fetch("/api/db/addUser", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({username, password, first_name, last_name, gender, email, city})
@@ -66,7 +66,7 @@ function Register() {
 				throw await addUser.text();
 			}
 
-			const sendEmail = await fetch("http://localhost:3001/api/auth/sendEmail", {
+			const sendEmail = await fetch("/api/auth/sendEmail", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({email})

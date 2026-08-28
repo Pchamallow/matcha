@@ -45,7 +45,7 @@ export function AuthProvider({children} : {children: ReactNode}) {
 
 	async function getSession(token: string) : Promise<User | undefined>
 	{
-		const response = await fetch(`http://localhost:3000/api/db/getSession?token=${token}`);
+		const response = await fetch(`/api/db/getSession?token=${token}`);
 		if (!response.ok)
 		{
 			console.error(response.text());
