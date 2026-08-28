@@ -15,7 +15,7 @@ logs:
 logs-frontend:
 	docker compose logs frontend
 
-logs-frontend:
+logs-backend:
 	docker compose logs backend
 
 clean:
