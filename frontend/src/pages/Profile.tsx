@@ -1,5 +1,5 @@
 import { useAuth } from '../AuthProvider'
-import NavBarLogIn from "../components/naviguationBar/logIn/navBarLogIn";
+import NavBarLogIn from "../components/navigationBar/logIn/navBarLogIn";
 
 function Profile() {
 	const { user } = useAuth();

@@ -3,8 +3,8 @@ import {Eye, EyeOff} from "lucide-react";
 import Cookies from 'universal-cookie';
 import { useNavigate } from "react-router-dom";
 import { useAuth, User } from "../AuthProvider";
-import CustomButton from "../components/buttons/customButton";
-import NavBarLogOut from "../components/naviguationBar/logOut/navBarLogOut";
+import CustomButton from "../components/buttons/CustomButton";
+import NavBarLogOut from "../components/navigationBar/logOut/navBarLogOut";
 
 function Login() {
 	const [user, setUser] = useState("");
@@ -36,7 +36,6 @@ function Login() {
 			}
 			else if (response.status == 200)
 			{
-				alert("Log in successfully");
 				const expirationDate = new Date();
 				expirationDate.setDate(expirationDate.getDate() + 1);
 				cookies.set("sessionToken", token, {

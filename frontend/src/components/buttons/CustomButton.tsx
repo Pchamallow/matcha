@@ -1,5 +1,5 @@
 import React from 'react';
-import "./customButton.css";
+import "./CustomButton.css";
 
 export interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	label: string;

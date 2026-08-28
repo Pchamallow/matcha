@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CustomButton from "../components/buttons/customButton";
-import NavBarLogOut from "../components/naviguationBar/logOut/navBarLogOut";
+import CustomButton from "../components/buttons/CustomButton";
+import NavBarLogOut from "../components/navigationBar/logOut/navBarLogOut";
 
 function Register() {
 	const [username, setUsername] = useState("");

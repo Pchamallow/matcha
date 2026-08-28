@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuth } from "../AuthProvider";
-import CustomButton from "../components/buttons/customButton";
-import NavBarLogOut from "../components/naviguationBar/logOut/navBarLogOut";
+import CustomButton from "../components/buttons/CustomButton";
+import NavBarLogOut from "../components/navigationBar/logOut/navBarLogOut";
 
 function Home() {
 	const navigate = useNavigate();
