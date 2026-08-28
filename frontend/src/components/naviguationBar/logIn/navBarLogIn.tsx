@@ -44,7 +44,7 @@ function NavBarLogIn() {
 		<nav className="navbar">
 			<div className="navbar-left">
 				<a href="#logo-clownder" className="navbar_logo"></a>
-				<SearchBar setResults={setResults} />
+				{/* <SearchBar setResults={setResults} /> */}
 				{/* avoir la searchbar ici pose probleme avce les input de register et login (case beaucoup + grandes)*/}
 				<SearchResultsList results={results}/>
 				<div id="navbar-left">
