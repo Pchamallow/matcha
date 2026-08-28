@@ -1,7 +1,7 @@
 
 /* Button with animated shadow ---------------------------------------- */
 
-.buttonCust {
+.customButton {
 	display: block;
 	transform: perspective(1px) translateZ(0);
 	box-shadow: 0 0 1px transparent;
@@ -11,13 +11,13 @@
 	transition-property: box-shadow, transform;
 }
 
-.buttonCust:hover,
-.buttonCust:focus,
-.buttonCust:active {
+.customButton:hover,
+.customButton:focus,
+.customButton:active {
 	box-shadow: 0px 10px 30px -10px rgba(0, 0, 24, 0.5);
 }
 
-.buttonCust {
+.customButton {
 	width:90%;
 	max-width: 350px;
 	padding: 1dvh 2dvh;

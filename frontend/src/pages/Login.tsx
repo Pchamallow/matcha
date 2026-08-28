@@ -3,7 +3,7 @@ import {Eye, EyeOff} from "lucide-react";
 import Cookies from 'universal-cookie';
 import { useNavigate } from "react-router-dom";
 import { useAuth, User } from "../AuthProvider";
-import ButtonCust from "../components/buttons/buttonCust";
+import CustomButton from "../components/buttons/customButton";
 import NavBarLogOut from "../components/naviguationBar/logOut/navBarLogOut";
 
 function Login() {
@@ -76,7 +76,7 @@ function Login() {
 						onChange={(e) => setPassword(e.target.value)}
 						autoComplete="current-password"
 					/>
-					<ButtonCust label="Login" naviguate={login}></ButtonCust>
+					<CustomButton label="Login" navigate={login}></CustomButton>
 				</div>
 			</div>
 		</>

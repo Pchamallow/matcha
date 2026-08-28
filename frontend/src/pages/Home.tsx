@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuth } from "../AuthProvider";
-import ButtonCust from "../components/buttons/buttonCust";
+import CustomButton from "../components/buttons/customButton";
 import NavBarLogOut from "../components/naviguationBar/logOut/navBarLogOut";
 
 function Home() {
@@ -49,9 +49,8 @@ function Home() {
 			</header>
 			<div className="background">
 				<div id="home">
-					<ButtonCust label="Register" naviguate={register}></ButtonCust>
-					<ButtonCust label="Login" naviguate={login}></ButtonCust>
-					<ButtonCust label="Logout"></ButtonCust>
+					<CustomButton label="Register" navigate={register}></CustomButton>
+					<CustomButton label="Login" navigate={login}></CustomButton>
 				</div>
 			</div>
 		</>
