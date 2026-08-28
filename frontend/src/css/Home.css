@@ -5,45 +5,14 @@
 	margin-top: 100px;
 }
 
-#home button {
-	margin: auto;
-	width:90%;
-	max-width: 350px;
-	height: 50px;
-	margin-top: 30px;
-	display: block;
-	border-radius: 10px;
-	font-size: clamp(16px, 4vw, 20px);
-	color: rgb(252, 252, 251);
-	border-color: #ab95b1;
-	border-style: none;
-	background:#ab95b1;
-	padding: 0 10px;
-}
-
-.banner{
-	background:#936a9d;
-	min-height: 6dvh;
-	max-height: 6dvh;
-	margin: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 20px 0;
-}
-
-.banner__text {
-	font: 1.2em serif;
-	color: hsla(0, 0%, 98%, 0.5);
-	font-size: clamp(5rem, 8vw, 20rem);
-	padding: 20px;
-	width: 10em;
-	text-align: center;
+@font-face {
+	font-family: arizonia;
+	src: url(../assets/fonts/Arizonia/Arizonia-Regular.ttf);
 }
 
 .background{
 	height: 100dvh;
-	background:#fffbc275;
+	background:#f8f3de;
 	margin: 0;
 	padding-top: 0%;
 }

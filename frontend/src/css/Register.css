@@ -59,3 +59,10 @@
 	color: #97021ab9;
 	margin: 0;
 }
+
+.background{
+	height: 100dvh;
+	background:#f8f3de;
+	margin: 0;
+	padding-top: 0%;
+}

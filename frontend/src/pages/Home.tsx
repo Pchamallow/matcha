@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuth } from "../AuthProvider";
+import ButtonCust from "../components/buttons/buttonCust";
+import NavBarLogOut from "../components/naviguationBar/logOut/navBarLogOut";
 
 function Home() {
 	const navigate = useNavigate();
@@ -43,17 +45,13 @@ function Home() {
 	return (
 		<>
 			<header>
-				<div className="banner">
-					<div className="banner__text">
-						Clownder
-					</div>
-				</div>
+				<NavBarLogOut></NavBarLogOut>
 			</header>
 			<div className="background">
 				<div id="home">
-					<button onClick={register}>Register</button>
-					<button onClick={login}>Login</button>
-					<button>Logout</button>
+					<ButtonCust label="Register" naviguate={register}></ButtonCust>
+					<ButtonCust label="Login" naviguate={login}></ButtonCust>
+					<ButtonCust label="Logout"></ButtonCust>
 				</div>
 			</div>
 		</>
