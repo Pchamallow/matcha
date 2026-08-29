@@ -63,7 +63,7 @@ router.post('/sendEmail', async (req, res) => {
 	{
 		res.status(500).send("Error when sending confirmation email : " + error.message);
 	}
-})
+});
 
 router.post('/sendPasswordEmail', async (req, res) => {
 	const { email } = req.body;
@@ -75,12 +75,6 @@ router.post('/sendPasswordEmail', async (req, res) => {
 	try
 	{
 		const token = crypto.randomUUID().replaceAll("-", "");
-		await transporter.sendMail({
-			from: process.env.EMAIL_USER,
-			to: email,
-			subject: "Clownder - Reset your password",
-			text: `http://localhost:5173/passwordchange?token=${token}`
-		});
 		const response = await fetch("http://localhost:3000/api/db/registerPasswordToken", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -88,14 +82,22 @@ router.post('/sendPasswordEmail', async (req, res) => {
 		});
 		if (!response.ok)
 		{
-			console.log("Error while registering password change token to database: " + error.message);
-			throw await response.text();
+			const message = await response.text();
+			console.log("Error while registering password change token to database: " + message);
+			res.status(404).send(message);
+			return;
 		}
+		await transporter.sendMail({
+			from: process.env.EMAIL_USER,
+			to: email,
+			subject: "Clownder - Reset your password",
+			text: `http://localhost:5173/passwordchange?token=${token}`
+		});
 		return res.status(200).send();
 	} catch (error)
 	{
 		res.status(500).send("Error when sending password change email : " + error.message);
 	}
-})
+});
 
 export { router };

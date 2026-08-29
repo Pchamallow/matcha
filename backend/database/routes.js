@@ -11,7 +11,7 @@ router.post('/addUser', async (req, res) => {
 	try
 	{
 		const hashedPassword = await bcrypt.hash(password, 10);
-		await db.run("INSERT INTO `users` (username, password, first_name, last_name, gender, email, city) VALUES (?,?,?,?,?,?,?)",
+		await db.run("INSERT INTO `users` (`username`, `password`, `first_name`, `last_name`, `gender`, `email`, `city`) VALUES (?,?,?,?,?,?,?)",
 			[username, hashedPassword, first_name, last_name, gender, email, city]
 		);
 
@@ -86,8 +86,8 @@ router.post('/login', async (req, res) => {
 		const startDate = new Date();
 		const endDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
-		await db.run("INSERT INTO `user_sessions` (username, token, start_date, end_date) VALUES (:username,:token,:startDate,:endDate) \
-				ON CONFLICT(username) DO UPDATE SET token=:token, start_date=:startDate, end_date=:endDate",
+		await db.run("INSERT INTO `user_sessions` (`username`, `token`, `start_date`, `end_date`) VALUES (:username,:token,:startDate,:endDate) \
+				ON CONFLICT(`username`) DO UPDATE SET `token`=:token, `start_date`=:startDate, `end_date`=:endDate",
 			{
 				":username": username,
 				":token": token,
@@ -119,9 +119,13 @@ router.get('/getSession', async (req, res) => {
 		return res.status(400).send("Bad request");
 	try
 	{
-		const row = await db.get("SELECT username, first_name, last_name, gender, email, email_verified, fame_rating, city FROM users WHERE username \
-				= (SELECT username FROM `user_sessions` WHERE `token` = ?)",
-			[token])
+		const nameRow = await db.get("SELECT `username` FROM `user_sessions` WHERE `token` = ?",
+			[token]);
+		if (!nameRow)
+			return res.status(404).send("Username not found.");
+		const row = await db.get("SELECT `username`, `first_name`, `last_name`, `gender`, `email`, `email_verified`, `fame_rating`, `city` FROM `users` \
+				WHERE `username` = ?",
+			[token, nameRow.username]);
 		if (row)
 		{
 			return res.status(200).send({
@@ -133,7 +137,7 @@ router.get('/getSession', async (req, res) => {
 				city: row.city
 			});
 		}
-		res.status(404).send(`${username} token not found in database.`);
+		res.status(200).send();
 	}
 	catch (error)
 	{
@@ -149,8 +153,8 @@ router.post('/deleteSession', async (req, res) => {
 
 	try
 	{
-		await db.run("DELETE FROM `user_sessions` WHERE username=:username",
-				{	":username":username	}
+		await db.run("DELETE FROM `user_sessions` WHERE `username`=:username",
+				{ ":username":username }
 			);
 		res.status(200).send(`User session successfully deleted.`);
 	}
@@ -167,7 +171,7 @@ router.post('/registerEmail', async (req, res) => {
 		return res.status(400).send("Bad request");
 	try
 	{
-		await db.run("INSERT INTO mail_tokens (email, token) VALUES (?,?)",
+		await db.run("INSERT INTO `mail_tokens` (`email`, `token`) VALUES (?,?)",
 			[email, token]);
 		res.status(200).send(`Email token logged!`);
 	} catch (error)
@@ -183,7 +187,7 @@ router.post('/verifyEmail', async (req, res) => {
 		return res.status(400).send("Bad request");
 	try
 	{
-		const result = await db.run("UPDATE users SET email_verified = ? WHERE email = (SELECT email FROM `mail_tokens` WHERE `token` = ?)",
+		const result = await db.run("UPDATE `users` SET `email_verified` = ? WHERE `email` = (SELECT `email` FROM `mail_tokens` WHERE `token` = ?)",
 			[1, token]);
 		if (result.changes == 0)
 			return res.status(400).send("Invalid token");
@@ -201,7 +205,7 @@ router.get('/isPasswordResetTokenValid', async (req, res) => {
 		return res.status(400).send("Bad request");
 	try
 	{
-		const row = await db.get("SELECT email FROM password_tokens WHERE `token` = ?",
+		const row = await db.get("SELECT `email` FROM `password_tokens` WHERE `token` = ?",
 			[token])
 		if (row)
 			return res.status(200).send();
@@ -220,7 +224,11 @@ router.post('/registerPasswordToken', async (req, res) => {
 		return res.status(400).send("Bad request");
 	try
 	{
-		await db.run("INSERT INTO password_tokens (email, token) VALUES (?,?)",
+		const row = await db.get("SELECT * FROM `users` WHERE `email` = ?",
+			[email]);
+		if (!row)
+			return res.status(404).send("Email not found.");
+		await db.run("INSERT INTO `password_tokens` (`email`, `token`) VALUES (?,?)",
 			[email, token]);
 		res.status(200).send(`Password token logged!`);
 	} catch (error)
@@ -237,9 +245,9 @@ router.post('/changePassword', async (req, res) => {
 	try
 	{
 		const hashedPassword = await bcrypt.hash(password, 10);
-		const row = await db.get("SELECT email FROM `password_tokens` WHERE `token` = ?",
+		const row = await db.get("SELECT `email` FROM `password_tokens` WHERE `token` = ?",
 			[token]);
-		if (row.length == 0)
+		if (!row)
 			throw "Email not found in password tokens.";
 		const email = row.email;
 		await db.run("UPDATE `users` SET `password` = ? WHERE `email` = ?",

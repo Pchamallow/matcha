@@ -17,11 +17,19 @@ function PasswordReset()
 				body: JSON.stringify({email})
 			});
 			if (!response.ok)
-				throw await response.text();
-		} catch
+				throw new Error(await response.text());
+		} catch (error: unknown)
 		{
-			console.error("Email not found.");
-			alert("Email not found.");
+			if (error instanceof Error)
+			{
+				console.error(error.message);
+				alert(error.message);
+			}
+			else
+			{
+				console.error("Unknown error.");
+				alert("Unknown error.");
+			}
 			return;
 		}
 		alert(`An email has been sent to ${email}`);
