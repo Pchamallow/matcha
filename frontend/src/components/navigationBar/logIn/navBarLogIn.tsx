@@ -1,10 +1,10 @@
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../AuthProvider";
-import SearchBar from "../SearchBar/SearchBar";
-import SearchResultsList from "../SearchBar/SearchResultsList";
+import SearchBar from "../searchBar/SearchBar";
+import SearchResultsList from "../searchBar/SearchResultsList";
 import { useState } from "react";
-import SearchResult from "../SearchBar/types";
+import SearchResult from "../searchBar/types";
 import "./navBarLogIn.css";
 
 function NavBarLogIn() {
