@@ -1,23 +1,23 @@
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../AuthProvider";
-import SearchBar from "../searchBar/searchBar";
-import SearchResultsList from "../searchBar/searchResultsList";
-import "./navBarLogIn.css";
+import SearchBar from "../SearchBar/SearchBar";
+import SearchResultsList from "../SearchBar/SearchResultsList";
 import { useState } from "react";
+import SearchResult from "../SearchBar/types";
+import "./navBarLogIn.css";
 
 function NavBarLogIn() {
 
 	const navigate = useNavigate();
 	const { setUser } = useAuth();
 	const { user } = useAuth();
-	const [ results, setResults ] = useState([]);
+	const [results, setResults] = useState<SearchResult[]>([]);
 
 	async function handleDeconnexion() {
 	
 		const cookies = new Cookies();
 		const token = cookies.get("sessionToken"); // used with api call
-
 		try
 		{
 			const deleteSession = await fetch ("/api/db/deleteSession", {
@@ -44,9 +44,16 @@ function NavBarLogIn() {
 		<nav className="navbar">
 			<div className="navbar-left">
 				<a href="#logo-clownder" className="navbar_logo"></a>
-				{/* <SearchBar setResults={setResults} /> */}
-				{/* avoir la searchbar ici pose probleme avce les input de register et login (case beaucoup + grandes)*/}
-				<SearchResultsList results={results}/>
+				<div className="navbar-searchbar">
+					<SearchBar setResults={setResults} />
+					{/* avoir la searchbar ici pose probleme avce les input de register et login (case beaucoup + grandes)*/}
+					{results.toString() != "" &&
+						<div className="navbar-searchresults">
+							<SearchResultsList results={results}/>
+							{/* {results.toString() } */}
+						</div>
+					}
+				</div>
 				<div id="navbar-left">
 					{/* <input className="search" placeholder="Search..">
 					</input> */}

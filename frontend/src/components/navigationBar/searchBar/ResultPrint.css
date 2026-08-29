@@ -1,0 +1,9 @@
+.result_print {
+	padding: 10px 20px;
+	font-size: large;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.result_print:hover {
+	background-color: #f8f3de;
+}

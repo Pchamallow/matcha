@@ -1,0 +1,26 @@
+
+.results_list {
+	width: 100%;
+	background-color:#f8eaf7;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0px 0px 8px #ddd;
+	border-radius: 10px;
+	max-height: 100px;
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: #c9b5c2 transparent;
+}
+
+/* for mozilla */
+.results_list::-webkit-scrollbar {
+	width: 8px;
+}
+
+.results_list::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.results_list::-webkit-scrollbar-thumb:hover {
+	background-color: #b87ab5;
+}

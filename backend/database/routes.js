@@ -38,7 +38,6 @@ router.post('/addUser', async (req, res) => {
 	res.status(201).send();
 });
 
-// changer pour ne renvoyer que les username pas le reste
 router.get('/getUsers', async (req, res) => {
 	const { input } = req.query;
 	if (!input)
@@ -48,9 +47,7 @@ router.get('/getUsers', async (req, res) => {
 		const row = await db.all("SELECT `username` FROM `users` WHERE `username` LIKE ?",
 			[`${input}%`]);
 		if (row)
-		{
 			return res.status(200).send(row);
-		}
 		res.status(404).send();
 	}
 	catch (error)
